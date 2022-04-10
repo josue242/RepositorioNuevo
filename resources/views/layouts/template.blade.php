@@ -113,7 +113,7 @@
                               </select>
                             </div>
                             <div class="col-md-4">
-                              <button type="submit" class="btn btn-primary btn-form" style="display: block"><i class="fa-solid fa-magnifying-glass"></i>     Buscar</button>
+                              <button type="submit" class="btn btn-primary btn-form" style="display: block"><i class="fa-solid fa-magnifying-glass"></i>     buscar</button>
                             </div>
                           </form>
                     <p class="fs-6"></p>
