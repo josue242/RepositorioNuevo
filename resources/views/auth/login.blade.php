@@ -1,12 +1,21 @@
 @extends('layouts.app')
 
 @section('content')
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
-
+                <center>
+                <div class="card-header">{{ __('') }}
+                    
+                    <div align="center"> <img src="{{asset('img/logoCirculo.png')}}" alt="logo" width="30%" height="auto"></div>
+                
+                
+                </div>
+                </center>
+                
+                <center>
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
@@ -15,15 +24,22 @@
                             <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Cuenta') }}</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                                <input id="cuenta" type="text" class="form-control" name="cuenta" value="{{('cuenta') }}" required autocomplete="" autofocus>
 
-                                @error('email')
+                                @error('cuenta')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
                             </div>
                         </div>
+                        <style>
+                           
+                            .card-header {
+                                --bs-bg-opacity: 1;
+                             background-color: rgb(74, 26, 116) !important;
+                            }
+                        </style>
                         
                                 
                         <div class="row mb-3">
@@ -47,9 +63,9 @@
                         </div>
 
                         <div class="row mb-0">
-                            <div class="col-md-8 offset-md-4">
+                            <div class="col-md-8 offset-md-2">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('Login') }}
+                                    {{ __('Acceder') }}
                                 </button>
 
                                 @if (Route::has('password.request'))
@@ -61,6 +77,7 @@
                         </div>
                     </form>
                 </div>
+            </center>
             </div>
         </div>
     </div>

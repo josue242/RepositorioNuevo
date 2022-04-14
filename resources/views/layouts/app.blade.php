@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Login') }}</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -18,10 +18,48 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+     <!-- Favicon-->
+     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+     <!-- Bootstrap icons-->
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet" />
+     <!-- Core theme CSS (includes Bootstrap)-->
+     <link href="css/styles.css" rel="stylesheet" />
+     <link href="asset({img/taller})" rel="stylesheet" />
+     <script src="https://kit.fontawesome.com/f687c855f2.js" crossorigin="anonymous"></script>
+     
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <img src="{{asset('img/Logo.jpeg')}}" alt="logo" width="14%" height="auto" margin_left=auto margin_right= auto>
+    
+                <div class="container px-lg-5">
+                    <a class="navbar-brand" href="#!">Colegio de profesionistas, compatir conocimiento</a>
+                   
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                    
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                            <li class="nav-item"><a class="nav-link active" aria-current="page" href="{{ url('/') }}"><i class="fa fa-home" aria-hidden="true"></i>
+                                 home</a></li>
+                            
+                          
+                        </ul>
+                        
+                    </div>
+                    
+                </div>
+
+                <style>
+                           
+                    .bg-dark {
+                        --bs-bg-opacity: 1;
+                     background-color: rgb(111, 60, 158) !important;
+                    }
+                </style>
+                
+            </nav>
             <div class="container">
                 <!--  <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}

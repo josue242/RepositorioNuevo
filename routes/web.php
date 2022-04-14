@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TemaController;
 use App\Http\Controllers\TemplateController;
 use App\Http\Controllers\HeaderController;
+use App\Http\Controllers\AltaController;
+use App\Http\Controllers\DropzoneController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,8 +25,10 @@ Route::get('/', function () {
 
 Route::resource('tema', TemaController::class);
 Route::resource('template', TemplateController::class);
-Route::resource('Head', HeaderController::class);
-
+Route::resource('busqueda', HeaderController::class);
+//Route::resource('alta', AltaController::class);
+Route::get('dropzone', [DropzoneController::class,'dropzone']);
+Route::post('dropzone-store', [DropzoneController::class,'dropzoneStore'])->name('dropzone.store');
 Auth::routes(['register'=> false, 'reset' => false, 'verify'=>false]);
 
 

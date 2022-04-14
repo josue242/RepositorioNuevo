@@ -21,8 +21,7 @@
     <body>
         <!-- Responsive navbar-->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <img src="{{asset('img/logo.jpg')}}" alt="logo" width="8%" height="auto" margin_left=auto margin_right= auto>
-
+            <img src="{{asset('img/Logo.jpeg')}}" alt="logo" width="14%" height="auto" margin_left=auto margin_right= auto>
             <div class="container px-lg-5">
                 <a class="navbar-brand" href="#!">Colegio de profesionistas, compatir conocimiento</a>
                
@@ -41,10 +40,36 @@
         </nav>
         <!-- Header-->
         <header class="py-5">
-            <div class="container px-lg-5">
+          
+            <div class="container px-lg-6">
+                <h1 class="display-8 fw-bold mt-0"><p class="m-0 text-center text-black">Repositorio Colegio de Profesionistas, Compartir Conocimiento</p></h1>
+                <br>
+                
+                <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                      <div class="carousel-item active">
+                        <img src="{{asset('img/inicio.jpg')}}" class="img-fluid" alt="estudiantes">
+                      </div>
+                      <div class="carousel-item">
+                        <img src="{{asset('img/inicio.jpg')}}" class="img-fluid" alt="salon de clases">
+                      </div>
+                      <div class="carousel-item">
+                        <img src="{{asset('img/inicio.jpg')}}" class="img-fluid" alt="salon de clases2">
+                      </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Next</span>
+                    </button>
+                  </div>
+
                 <div class="p-4 p-lg-5 bg-light rounded-3 text-center">
                     <div class="m-2 m-lg-5">
-                        <h1 class="display-5 fw-bold mt-0">COLEGIO DE PROFESIONISTAS, COMPARTIR CONOCIMIENTO</h1>
+                        <h1 class="display-5 fw-bold mt-0">EXPLORAR</h1>
                         <br>
                         <br>
                         <br>
@@ -131,11 +156,23 @@
                                 margin-left: auto;
                                 margin-right: auto;
                             }
+                            .container{
+                               
+                                margin-left: auto;
+                                margin-right: auto;
+                            }
                             .feature{
                                 height: 10rem;
                             width: 10rem;
                             font-size: 8ch;
+                            background-color: rgb(65, 9, 117) !important;
                             }
+                            .btn{
+                                --bs-bg-opacity: 1;
+                             background-color: rgb(65, 9, 117) !important;
+
+                            }
+                            
 
                             .bg-dark {
                                 --bs-bg-opacity: 1;
@@ -157,6 +194,7 @@
                     <div class="col-lg-6 col-xxl-4 mb-5">
                         <div class="card bg-light border-0 h-100">
                             <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
+
                                 <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4"><i class="fa-solid fa-scale-balanced"></i>
                                 </div>
                                 <h2 class="fs-4 fw-bold">Propuestas de ley</h2>
@@ -203,6 +241,15 @@
                     <div class="col-lg-6 col-xxl-4 mb-5">
                         <div class="card bg-light border-0 h-100">
                             <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
+                                <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4"><i class="fa-solid fa-people-group"></i></div>
+                                <h2 class="fs-4 fw-bold">Foros</h2>
+                                <p class="mb-0"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-xxl-4 mb-5">
+                        <div class="card bg-light border-0 h-100">
+                            <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
                                 <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4"><i class="fa-solid fa-users-gear"></i></div>
                                 <h2 class="fs-4 fw-bold">Coordinaciones</h2>
                                 <p class="mb-0"></p>
@@ -218,6 +265,7 @@
         <!-- Footer-->
         <footer class="py-5 bg-orange">
             <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2022</p></div>
+            <img src="{{asset('img/logoCirculo.png')}}" alt="logo" width="10%" height="auto" >
         </footer>
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>

@@ -14,14 +14,14 @@
         <link href="css/styles.css" rel="stylesheet" />
         <link href="asset({img/taller})" rel="stylesheet" />
         <script src="https://kit.fontawesome.com/f687c855f2.js" crossorigin="anonymous"></script>
-        
+       
 
 
     </head>
     <body>
         <!-- Responsive navbar-->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <img src="{{asset('img/logo.jpg')}}" alt="logo" width="8%" height="auto" margin_left=auto margin_right= auto>
+            <img src="{{asset('img/Logo.jpeg')}}" alt="logo" width="14%" height="auto" margin_left=auto margin_right= auto>
 
             <div class="container px-lg-5">
                 <a class="navbar-brand" href="#!">Colegio de profesionistas, compatir conocimiento</a>
@@ -136,6 +136,7 @@
                                 height: 10rem;
                             width: 10rem;
                             font-size: 8ch;
+                            background-color: rgb(65, 9, 117) !important;
                             }
 
                             .bg-dark {
@@ -197,6 +198,15 @@
                             <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
                                 <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4"><i class="fa-solid fa-users-between-lines"></i></div>
                                 <h2 class="fs-4 fw-bold">Talleres</h2>
+                                <p class="mb-0"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-xxl-4 mb-5">
+                        <div class="card bg-light border-0 h-100">
+                            <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
+                                <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4"><i class="fa-solid fa-people-group"></i></div>
+                                <h2 class="fs-4 fw-bold">Foros</h2>
                                 <p class="mb-0"></p>
                             </div>
                         </div>
