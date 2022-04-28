@@ -1,10 +1,20 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
-
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Session\Middleware\AuthenticateSession;
+use Illuminate\Support\MessageBag;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Auth\where;
 use App\Providers\RouteServiceProvider;
+use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Hash;
+
+use App\Models\User;
+use Illuminate\Support\Facades\Auth as FacadesAuth;
 
 class LoginController extends Controller
 {
@@ -20,6 +30,8 @@ class LoginController extends Controller
     */
 
     use AuthenticatesUsers;
+
+    
 
     /**
      * Where to redirect users after login.
@@ -37,4 +49,36 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+    public function login(Request $request)
+    {
+        $credential = $this->validate($request, [
+            'email' => 'required|string',
+            'password' => 'required|string',
+           
+        ]);
+
+        $credentials = [
+
+            'email' => $credential['email'],
+            'password' => $credential ['password'],
+        ];
+        if (Auth::attempt($credentials )) {
+            // Authentication was successful...
+            $request->session()->regenerate();
+            return redirect()->intended('template');
+        }
+            //return back()->withErrors([$this->username()=>'Datos incorrectos']);
+            return redirect("login")->withErrors(['msgError'=>'Credenciales no validas']);
+    
+        
+    }
+
+   public function logout(Request $request){
+    
+    session::flush();
+    Auth::logout();
+
+    return redirect('login');
+   }
+  
 }

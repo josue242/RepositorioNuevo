@@ -30,10 +30,10 @@
                 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="{{ url('/template') }}"><i class="fa fa-home" aria-hidden="true"></i>
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!"><i class="fa fa-home" aria-hidden="true"></i>
                              home</a></li>
                         
-                        <li class="nav-item"><a class="nav-link" href=""><i class="fa-solid fa-user"></i> usuario</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#!"><i class="fa-solid fa-user"></i> usuario</a></li>
                     </ul>
                     
                 </div>
@@ -54,16 +54,34 @@
                             <div class="col-md-3">
                                 <label for="inputAño" class="form-label">Seleccionar</label>
                             <select class="form-select" aria-label="Default select example">
-                                <option selected>Todo</option>
-                                <option value="1">Tipo</option>
-                                <option value="2">Titulo</option>
-                                <option value="3">Palabras clave</option>
-                            
+                                <option selected>Coordinaciones</option>
+                                <option value="1">Coord.Gral. de Profesionales de la comunicación</option>
+                                <option value="2">Coord.Gral. de Profesionales de la contaduría</option>
+                                <option value="3">Coord.Gral. de Profesionales de la optometría</option>
+                                <option value="4">Coord.Gral. de Profesionales de la nutrición</option>
+                                <option value="5">Coord.Gral. de Profesionales de la informática</option>
+                                <option value="6">Coord.Gral. de Profesionales del derecho</option>
+                                <option value="7">Coord.Gral. de Profesionales de la criminalística y criminología</option>
+                                <option value="8">Coord.Gral. de Profesionales de la comunicación</option>
+                                <option value="9">Coord.Gral. de Profesionales de las ciencias forenses</option>
+                                <option value="10">Coord.Gral. de Profesionales de la educación</option>
+                                <option value="11">Coord.Gral. de Profesionales de la imagen estratégica</option>
+                                <option value="13">Coord.Gral. de Profesionales de la ingeniería civil</option>
+                              </select>
                               </select>
                             </div>
                             <div class="col-md-4">
-                                <label for="inputPassword4" class="form-label">Insertar</label>
-                                <input type="password" class="form-control" id="inputPassword4">
+                                <label for="inputAño" class="form-label">Seleccionar</label>
+                            <select class="form-select" aria-label="Default select example">
+                                <option selected>Todo</option>
+                                <option value="1">Propuestas de ley</option>
+                                <option value="2">Mesa de profesionistas</option>
+                                <option value="3">Foros</option>
+                                <option value="4">Talleres</option>
+                                <option value="5">Infografías</option>
+                                <option value="3">Articulos</option>
+                            
+                              </select>
                             </div>
                             <div class="col-md-4">
                               <button type="submit" class="btn btn-primary btn-form" style="display: block"><i class="fa-solid fa-magnifying-glass" target="_blank"></i>     Buscar</button>
@@ -72,6 +90,9 @@
                           
 
                           </form>
+
+                    </div>
+                </div>
         
             <style>
                 form{
@@ -113,28 +134,12 @@
                 .bg-orange{
                     background-color: rgb(184, 129, 12) !important;
                 }
-                
             </style>
+
             </div>
-            <section class="pt-4">
-                <div class="container px-lg-5">
-    
-                              <div class="d-grid gap-2 col-5 mx-auto">
-                                <a class="btn btn-warning" href="{{ url('/dropzone') }}" role="button">Subir Archivo</a>
-                                 
-                                
-                              </div>
-                </div>
-            </section>
-
-            <header class="py-5">
-           
-                <div class="container px-lg-7">
-
-                </div>
-            </header>
         </header>
+       
+
 
     </body>
 </html>
-

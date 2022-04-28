@@ -117,11 +117,26 @@
                                
                               </select>
                             </div>
+                            <div class="col-md-4">
+                                <label for="inputAño" class="form-label">Tipo</label>
+                            <select class="form-select" aria-label="Default select example">
+                                <option selected>Todos</option>
+                                <option value="1">Propuestas de ley</option>
+                                <option value="2">Talleres</option>
+                                <option value="3">Foros</option>
+                                <option value="4">Infografías</option>
+                                <option value="5">Articulos</option>
+                                <option value="6">Mesa de profesionitas</option>
+
+                              </select>
+                            </div>
                             
                             <div class="col-md-4">
                                 <label for="inputAño" class="form-label">Coordinaciones</label>
                             <select class="form-select" aria-label="Default select example">
-                                <option selected>Todas</option>
+                                <option selected> </option>
+                               
+                                <option value="14">Todas</option>
                                 <option value="1">Coord.Gral. de Profesionales de la comunicación</option>
                                 <option value="2">Coord.Gral. de Profesionales de la contaduría</option>
                                 <option value="3">Coord.Gral. de Profesionales de la optometría</option>
@@ -136,9 +151,11 @@
                                 <option value="13">Coord.Gral. de Profesionales de la ingeniería civil</option>
                               </select>
                             </div>
-                            <div class="col-md-4">
+                            <center>
+                            <div class="col-md-6">
                               <button type="submit" class="btn btn-primary btn-form" style="display: block"><i class="fa-solid fa-magnifying-glass"></i>     Buscar</button>
                             </div>
+                            </center>
                           </form>
                     <p class="fs-6"></p>
                         <style>
@@ -151,6 +168,11 @@
                                 box-sizing: border-box;
                                 margin-top: 30px;
                             }
+                            .fa-scale-balanced ,.fa-book, .fa-file-signature, .fa-people-line, .fa-users-between-lines, .fa-people-group, .fa-users-gear {
+                            
+                            font-size: 8ch;
+                        }
+                        
                             .col-xxl-4{
                                 width: 30%;
                                 margin-left: auto;
@@ -161,17 +183,19 @@
                                 margin-left: auto;
                                 margin-right: auto;
                             }
+                            
                             .feature{
                                 height: 10rem;
                             width: 10rem;
                             font-size: 8ch;
                             background-color: rgb(65, 9, 117) !important;
                             }
-                            .btn{
+                            .btn-primary{
                                 --bs-bg-opacity: 1;
                              background-color: rgb(65, 9, 117) !important;
 
                             }
+                            
                             
 
                             .bg-dark {
@@ -194,10 +218,12 @@
                     <div class="col-lg-6 col-xxl-4 mb-5">
                         <div class="card bg-light border-0 h-100">
                             <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
-
-                                <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4"><i class="fa-solid fa-scale-balanced"></i>
+                                <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4">
+                                    <a class="btn btn-outline-warning" href="{{ url('/dropzone') }}" role="button"><i class="fa-solid fa-scale-balanced"></i></a>
+                                    
                                 </div>
-                                <h2 class="fs-4 fw-bold">Propuestas de ley</h2>
+                                <a class="btn btn-darck" href="{{ url('/dropzone') }}" role="button"><h2 class="fs-4 fw-bold">Propuestas de ley</h2></a>
+                                
                                 <p class="mb-0"></p>
                             </div>
                         </div>
@@ -205,8 +231,11 @@
                     <div class="col-lg-6 col-xxl-4 mb-5">
                         <div class="card bg-light border-0 h-100">
                             <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
-                                <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4"><i class="fa-solid fa-book"></i></div>
-                                <h2 class="fs-4 fw-bold">Articulos</h2>
+                                <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4">
+                                    <a class="btn btn-outline-warning" href="{{ url('/dropzone') }}" role="button"><i class="fa-solid fa-book"></i></a>
+                                </div>
+                                <a class="btn btn-darck" href="{{ url('/dropzone') }}" role="button"><h2 class="fs-4 fw-bold">Articulos</h2></a>
+                           
                                 <p class="mb-0"></p>
                             </div>
                         </div>
@@ -214,8 +243,11 @@
                     <div class="col-lg-6 col-xxl-4 mb-5">
                         <div class="card bg-light border-0 h-100">
                             <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
-                                <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4"><i class="fa-solid fa-file-signature"></i></div>
-                                <h2 class="fs-4 fw-bold">Infografías</h2>
+                                <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4">
+                                    <a class="btn btn-outline-warning" href="{{ url('/dropzone') }}" role="button"><i class="fa-solid fa-file-signature"></i></a>
+                                </div> 
+                                <a class="btn btn-darck" href="{{ url('/dropzone') }}" role="button"><h2 class="fs-4 fw-bold">Infografías</h2></a>
+                                 
                                 <p class="mb-0"></p>
                             </div>
                         </div>
@@ -223,8 +255,10 @@
                     <div class="col-lg-6 col-xxl-4 mb-5">
                         <div class="card bg-light border-0 h-100">
                             <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
-                                <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4"><i class="fa-solid fa-people-line"></i></div>
-                                <h2 class="fs-4 fw-bold">Mesa de profesionitas</h2>
+                                <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4">
+                                    <a class="btn btn-outline-warning" href="{{ url('/dropzone') }}" role="button"><i class="fa-solid fa-people-line"></i></a>
+                                </div>
+                                <a class="btn btn-darck" href="{{ url('/dropzone') }}" role="button"><h2 class="fs-4 fw-bold">Mesa de profesionitas</h2></a>
                                 <p class="mb-0"></p>
                             </div>
                         </div>
@@ -232,8 +266,11 @@
                     <div class="col-lg-6 col-xxl-4 mb-5">
                         <div class="card bg-light border-0 h-100">
                             <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
-                                <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4"><i class="fa-solid fa-users-between-lines"></i></div>
-                                <h2 class="fs-4 fw-bold">Talleres</h2>
+                                <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4">
+                                    <a class="btn btn-outline-warning" href="{{ url('/dropzone') }}" role="button"><i class="fa-solid fa-users-between-lines"></i></a>
+                                </div>
+                                    <a class="btn btn-darck" href="{{ url('/dropzone') }}" role="button"><h2 class="fs-4 fw-bold">Talleres</h2></a>
+                               
                                 <p class="mb-0"></p>
                             </div>
                         </div>
@@ -241,8 +278,12 @@
                     <div class="col-lg-6 col-xxl-4 mb-5">
                         <div class="card bg-light border-0 h-100">
                             <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
-                                <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4"><i class="fa-solid fa-people-group"></i></div>
-                                <h2 class="fs-4 fw-bold">Foros</h2>
+                                <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4">
+                                    <a class="btn btn-outline-warning" href="{{ url('/dropzone') }}" role="button"><i class="fa-solid fa-people-group"></i></a>
+                                </div>
+                                
+                                    <a class="btn btn-darck" href="{{ url('/dropzone') }}" role="button"><h2 class="fs-4 fw-bold">Foros</h2></a>
+
                                 <p class="mb-0"></p>
                             </div>
                         </div>
@@ -250,8 +291,11 @@
                     <div class="col-lg-6 col-xxl-4 mb-5">
                         <div class="card bg-light border-0 h-100">
                             <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
-                                <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4"><i class="fa-solid fa-users-gear"></i></div>
-                                <h2 class="fs-4 fw-bold">Coordinaciones</h2>
+                                <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4">
+                                    <a class="btn btn-outline-warning" href="{{ url('/dropzone') }}" role="button"><i class="fa-solid fa-users-gear"></i></a>
+                                </div>
+
+                                    <a class="btn btn-darck" href="{{ url('/dropzone') }}" role="button"><h2 class="fs-4 fw-bold">Coordinaciones</h2></a>
                                 <p class="mb-0"></p>
                             </div>
                         </div>
@@ -259,6 +303,7 @@
                 </div>
             </div>
         </section>
+    
             <main class="py-4">
             @yield('content')
         </main>

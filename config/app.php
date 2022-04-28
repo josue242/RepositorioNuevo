@@ -177,6 +177,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Reliese\Coders\CodersServiceProvider::class,
+       // Auth0\Login\LoginServiceProvider::class,
 
     ],
 
@@ -194,5 +195,6 @@ return [
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
     ])->toArray(),
-
+    //'Auth0' => Auth0\Login\Facade\Auth0::class,
 ];
+

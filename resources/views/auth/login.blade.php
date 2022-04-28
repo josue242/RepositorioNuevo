@@ -9,6 +9,7 @@
                 <center>
                 <div class="card-header">{{ __('') }}
                     
+                 
                     <div align="center"> <img src="{{asset('img/logoCirculo.png')}}" alt="logo" width="30%" height="auto"></div>
                 
                 
@@ -16,17 +17,23 @@
                 </center>
                 
                 <center>
+                   
                 <div class="card-body">
+                    @if($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>{{$errors->first()}}</ul>
+                    </div>
+                        @endif
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 
                         <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Cuenta') }}</label>
+                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('email') }}</label>
 
                             <div class="col-md-6">
-                                <input id="cuenta" type="text" class="form-control" name="cuenta" value="{{('cuenta') }}" required autocomplete="" autofocus>
+                                <input id="email" type="email" class="form-control" name="email" value="{{('') }}" required autocomplete="" autofocus>
 
-                                @error('cuenta')
+                                @error('email')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -43,7 +50,7 @@
                         
                                 
                         <div class="row mb-3">
-                            <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
+                            <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('password') }}</label>
 
                             <div class="col-md-6">
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
@@ -64,8 +71,9 @@
 
                         <div class="row mb-0">
                             <div class="col-md-8 offset-md-2">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-warning">
                                     {{ __('Acceder') }}
+                                   
                                 </button>
 
                                 @if (Route::has('password.request'))
