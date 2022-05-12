@@ -132,7 +132,7 @@
                        
                         
                         <div class="card-header">
-                            Subir Archivo
+                            Editar Archivo
                         </div>
                         <div class="card-body">
                             <form action="{{route('dropzone.store')}}" method="POST"  enctype="multipart/form-data" class="dropzone dz-clickable" id="image-upload">

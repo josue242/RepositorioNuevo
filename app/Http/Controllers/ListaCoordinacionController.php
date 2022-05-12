@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Rol;
+
+use App\Models\Tipomaterial;
 
 class ListaCoordinacionController extends Controller
 {
@@ -13,7 +16,11 @@ class ListaCoordinacionController extends Controller
      */
     public function index()
     {
-        return view ('View.listacoordinaciones');
+        $tipomateriales = Tipomaterial::all();
+        $coordinaciones = Rol::all();
+        return view ('View.listacoordinaciones', 
+        compact('tipomateriales','coordinaciones'));
+       
         
     }
 

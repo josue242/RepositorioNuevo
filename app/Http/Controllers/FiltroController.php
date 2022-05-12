@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class HeaderController extends Controller
+class FiltroController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +13,7 @@ class HeaderController extends Controller
      */
     public function index()
     {
-        return view('View.busqueda');
+        return view('View.filtro');
         //
     }
 

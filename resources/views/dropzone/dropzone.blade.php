@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="utf-8" />
@@ -57,80 +57,11 @@
     <br>
     <br>
     <br>
-    <style>
-        form{
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-        }
-        .btn-form{
-            box-sizing: border-box;
-            margin-top: 30px;
-        }
-        .col-xxl-4{
-            width: 30%;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        .container{
-        
-            margin-left: auto;
-            margin-right: auto;
-        }
-        .feature{
-            height: 10rem;
-        width: 10rem;
-        font-size: 8ch;
-        background-color: rgb(65, 9, 117) !important;
-        }
-        .btn-primary{
-            --bs-bg-opacity: 1;
-        background-color: rgb(65, 9, 117) !important;
-
-        }
-        .card-header{
-            --bs-bg-opacity: 1;
-        background-color: rgb(233, 211, 10) !important;
-
-        }
-        .card-body{
-            --bs-bg-opacity: 1;
-        background-color: rgb(65, 9, 117) !important;
-
-        }
-        .form-group{
-            background-color: rgb(65, 9, 117) !important;
-        }
-
-        .bg-dark {
-            --bs-bg-opacity: 1;
-        background-color: rgb(65, 9, 117) !important;
-        }
-        .bg-orange{
-            background-color: rgb(184, 129, 12) !important;
-        }
-    </style>
     <section style= "pading-top:60px">
         <div class="container">
-            <div class="row-3">
+            <div class="row">
                 <div class="col-md-12">
-                    <center>
-                    <h1 class="display-5 fw-bold mt-0">Subir archivo</h1>
-                    </center>
-                    <div class="form-group">
-
-                        <strong>URL:</strong>
-        
-                        <input type="text" name="name" class="form-control" placeholder="Name">
-                       
-                    </div>
-                    <br>
-                    <br>
-                    <br>
-                    
                     <div class="card">
-                       
-                        
                         <div class="card-header">
                             Subir Archivo
                         </div>
@@ -138,29 +69,20 @@
                             <form action="{{route('dropzone.store')}}" method="POST"  enctype="multipart/form-data" class="dropzone dz-clickable" id="image-upload">
                                
                                 @csrf
-                                <center>
+                                <input type="file" name="file" />
                                 <div>
-                                    
                                     <h3 class="text-center">Upload Image By click on box</h3>
                                 </div>
-                                <br>
                                 <div class="dz-default dz-message"><span>Drop files here to upload</span></div>
-                                </center>
+                                
                             </form>
+                           
                         </div>
                     </div>
-                    
-                </div>
-               
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+              
             </div>
-            <br>
-            <br>
-        
-            <center>
-            <button type="button" class="btn btn-warning btn-lg">Guardar</button>
-            <button type="button" class="btn btn-danger btn-lg">Cancelar</button>
-        </center>
-        </div>  
+        </div>
 
        
     </section>
@@ -179,10 +101,6 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/6.0.0-beta.2/basic.min.css" integrity="sha512-MeagJSJBgWB9n+Sggsr/vKMRFJWs+OUphiDV7TJiYu+TNQD9RtVJaPDYP8hA/PAjwRnkdvU+NsTncYTKlltgiw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <body>
-
-
-
-  
 
 
   

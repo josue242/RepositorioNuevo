@@ -65,7 +65,7 @@ class LoginController extends Controller
         if (Auth::attempt($credentials )) {
             // Authentication was successful...
             $request->session()->regenerate();
-            return redirect()->intended('template');
+            return redirect()->intended('busqueda');
         }
             //return back()->withErrors([$this->username()=>'Datos incorrectos']);
             return redirect("login")->withErrors(['msgError'=>'Credenciales no validas']);

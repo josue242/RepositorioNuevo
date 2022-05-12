@@ -55,31 +55,17 @@
                                 <label for="inputAño" class="form-label">Seleccionar</label>
                             <select class="form-select" aria-label="Default select example">
                                 <option selected>Coordinaciones</option>
-                                <option value="1">Coord.Gral. de Profesionales de la comunicación</option>
-                                <option value="2">Coord.Gral. de Profesionales de la contaduría</option>
-                                <option value="3">Coord.Gral. de Profesionales de la optometría</option>
-                                <option value="4">Coord.Gral. de Profesionales de la nutrición</option>
-                                <option value="5">Coord.Gral. de Profesionales de la informática</option>
-                                <option value="6">Coord.Gral. de Profesionales del derecho</option>
-                                <option value="7">Coord.Gral. de Profesionales de la criminalística y criminología</option>
-                                <option value="8">Coord.Gral. de Profesionales de la comunicación</option>
-                                <option value="9">Coord.Gral. de Profesionales de las ciencias forenses</option>
-                                <option value="10">Coord.Gral. de Profesionales de la educación</option>
-                                <option value="11">Coord.Gral. de Profesionales de la imagen estratégica</option>
-                                <option value="13">Coord.Gral. de Profesionales de la ingeniería civil</option>
-                              </select>
+                                @foreach($coordinaciones as $coordinacion)
+                                <option value="{{$coordinacion->id}}">{{$coordinacion->descripcion}}</option>
+                              @endforeach
                               </select>
                             </div>
                             <div class="col-md-4">
                                 <label for="inputAño" class="form-label">Seleccionar</label>
                             <select class="form-select" aria-label="Default select example">
-                                <option selected>Todo</option>
-                                <option value="1">Propuestas de ley</option>
-                                <option value="2">Mesa de profesionistas</option>
-                                <option value="3">Foros</option>
-                                <option value="4">Talleres</option>
-                                <option value="5">Infografías</option>
-                                <option value="3">Articulos</option>
+                                @foreach($tipomateriales as $tipo)
+                                <option value="{{$tipo->id}}">{{$tipo->descripcion}}</option>";
+                            @endforeach
                             
                               </select>
                             </div>
