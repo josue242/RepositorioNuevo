@@ -35,26 +35,25 @@
                     </ul>
                     
                 </div>
-                
-            </div>
         </nav>
         <!-- Header-->
         <header class="py-5">
-          
             <div class="container px-lg-6">
-                <h1 class="display-8 fw-bold mt-0"><p class="m-0 text-center text-black">Repositorio Colegio de Profesionistas, Compartir Conocimiento</p></h1>
+                <h1 class="display-8 fw-bold mt-0"><p class="m-0 text-center text-black">Colegio de Profesionistas, Compartir Conocimiento</p></h1>
                 <br>
-                
                 <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner">
                       <div class="carousel-item active">
                         <img src="{{asset('img/inicio.jpg')}}" class="img-fluid" alt="estudiantes">
                       </div>
                       <div class="carousel-item">
-                        <img src="{{asset('img/inicio.jpg')}}" class="img-fluid" alt="salon de clases">
+                        <img src="{{asset('img/ieu.jpg')}}" class="img-fluid" alt="salon de clases">
                       </div>
                       <div class="carousel-item">
-                        <img src="{{asset('img/inicio.jpg')}}" class="img-fluid" alt="salon de clases2">
+                        <img src="{{asset('img/convenio.jpg')}}" class="img-fluid" alt="salon de clases2">
+                      </div>
+                      <div class="carousel-item">
+                        <img src="{{asset('img/oaxaca.jpg')}}" class="img-fluid" alt="salon de clases3">
                       </div>
                     </div>
                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
@@ -66,7 +65,7 @@
                       <span class="visually-hidden">Next</span>
                     </button>
                   </div>
-
+                  <br>
                   <div class="p-4 p-lg-5 bg-light rounded-3 text-center">
                     <div class="m-2 m-lg-5">
                         
@@ -292,5 +291,3 @@
             
             </html>
             
-    
-          

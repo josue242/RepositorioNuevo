@@ -66,7 +66,7 @@
                             Subir Archivo
                         </div>
                         <div class="card-body">
-                            <form action="{{route('dropzone.store')}}" method="POST"  enctype="multipart/form-data" class="dropzone dz-clickable" id="image-upload">
+                            <form  class= "row g-3" action="{{route('dropzone.store')}}" method="POST"  enctype="multipart/form-data" class="dropzone dz-clickable" id="image-upload">
                                
                                 @csrf
                                 <input type="file" name="file" />

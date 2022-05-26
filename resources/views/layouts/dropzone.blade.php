@@ -95,11 +95,11 @@
         }
         .card-body{
             --bs-bg-opacity: 1;
-        background-color: rgb(65, 9, 117) !important;
+        background-color: rgb(236, 234, 238) !important;
 
         }
         .form-group{
-            background-color: rgb(65, 9, 117) !important;
+            background-color: rgb(241, 236, 245) !important;
         }
 
         .bg-dark {
@@ -110,43 +110,86 @@
             background-color: rgb(184, 129, 12) !important;
         }
     </style>
-    <section style= "pading-top:60px">
-        <div class="container">
-            <div class="row-3">
-                <div class="col-md-12">
-                    <center>
-                    <h1 class="display-5 fw-bold mt-0">Subir archivo</h1>
-                    </center>
-                    <div class="form-group">
+                </form>
+                <section style= "pading-top:60px">
+                    <div class="container">
+                <div class="row-3">
+                    <div class="col-md-12">
+                        <div class="card">
+                           
+                            
+                            <div class="card-header">
+                                Subir Archivo
+                            </div>
+                            <div class="card-body">
+                                <form class = "row g-3" action="{{route('dropzone.store')}}" method= "POST"  enctype="multipart/form-data" class="dropzone dz-clickable" 
+                                >
+                                <div class="form-group">
+                                    @csrf
+                                    <label for="foto">Archivo:</label>
+                                    <input type="file" id="file" accept="image/png, image/jpeg, image/pdf" 
+                                     class="form-control" name="file" 
+                                     onchange="previewImage(event,'file');"
+                                      />
+                                      <img src="" id="file" >
+                                </div>
 
-                        <strong>URL:</strong>
-        
-                        <input type="text" name="name" class="form-control" placeholder="Name">
-                       
-                    </div>
-                    <br>
-                    <br>
-                    <br>
-                    
-                    <div class="card">
-                       
-                        
-                        <div class="card-header">
-                            Subir Archivo
-                        </div>
-                        <div class="card-body">
-                            <form action="{{route('dropzone.store')}}" method="POST"  enctype="multipart/form-data" class="dropzone dz-clickable" id="image-upload">
-                               
-                                @csrf
-                                <center>
-                                <div>
+                                   
+                                    @csrf
                                     
-                                    <h3 class="text-center">Upload Image By click on box</h3>
+                                        <div class="col-md-4">
+                                            <label for="documento" class="form-label">Titulo</label>
+                                            <input type="text" class="form-control" id="documento" name="documento">
+                                        </div>
+                        
+                                        <div class="col-md-4">
+                                            <label for="descripcion" class="form-label">Descripcion</label>
+                                            <input type="text" class="form-control" id="descripcion" name="descripcion">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="tema" class="form-label">Tema</label>
+                                        <select class="form-select" name="tema" aria-label="Default select example">
+                                            @foreach($tema as $tem)
+                                                <option value="{{$tem->id}}">{{$tem->descripcion}}</option>";
+                                            @endforeach
+                                          </select>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="tipo" class="form-label">Tipo Material</label>
+                                        <select class="form-select" name="tipo" aria-label="Default select example">
+                                            @foreach($tipomateriales as $tipo)
+                                                <option value="{{$tipo->id}}">{{$tipo->descripcion}}</option>";
+                                            @endforeach
+                                          </select>
+                                        </div>
+                        
+                                          <div class="col-md-4">
+                                            <label for="nomenclatura" class="form-label">Nomenclatura</label>
+                                            <input type="text" class="form-control" id="nomenclatura" name="nomenclatura">
+                                          </div>
+                                          <div class="col-md-4">
+                                            <label for="ubicacion" class="form-label">Ubicacion</label>
+                                            <input type="text" class="form-control" id="ubicacion" name="ubicacion">
+                                          </div>
+                                   
                                 </div>
                                 <br>
-                                <div class="dz-default dz-message"><span>Drop files here to upload</span></div>
+                                <br>
+                            </div>
+                           
+                              
+                                <center>
+                                    <button type="submit" class="btn btn-warning btn-lg">Guardar</button>
+                                    <button type="submit" class="btn btn-danger btn-lg">Cancelar</button>
                                 </center>
-                            </form>
+                                </form>
+                                <br>
+                                <br>
+    <section style= "pading-top:60px">
+        <div class="container">
+            
+                    
+
                         </div>
                     </div>
                     
@@ -155,11 +198,6 @@
             </div>
             <br>
             <br>
-        
-            <center>
-            <button type="button" class="btn btn-warning btn-lg">Guardar</button>
-            <button type="button" class="btn btn-danger btn-lg">Cancelar</button>
-        </center>
         </div>  
 
        

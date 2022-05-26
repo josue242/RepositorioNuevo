@@ -160,6 +160,7 @@
             <button type="button" class="btn btn-warning btn-lg">Guardar</button>
             <button type="button" class="btn btn-danger btn-lg">Cancelar</button>
         </center>
+        <a href="{{ url('/filtro') }}" class="btn btn-lg btn-primary" role="button">Regresar</a>
         </div>  
 
        

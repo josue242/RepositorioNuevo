@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Rol;
+use App\Models\Repositorio;
+use App\Models\Repotema;
+use App\Models\Detallerepo;
+use Illuminate\Support\Facades\DB;
 
 use App\Models\Tipomaterial;
 
@@ -42,7 +46,39 @@ class ListaCoordinacionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+     
+       $tipo = $request->tipo==-1?"":$request->tipo;
+       $tipo = "%$tipo%";
+       $coordinacion = $request->coordinacion==-1?"":$request->coordinacion;
+       $coordinacion = "%$coordinacion%";
+       
+       $sql ="SELECT * FROM repositorio r INNER JOIN (repotema rt 
+       INNER JOIN tema t ON rt.tema_id=t.id) 
+       ON rt.repositorio_id = r.id 
+       INNER JOIN detallerepo dr ON dr.repositorio_id=r.id 
+       INNER JOIN (usuario u  INNER JOIN usuariorol ur ON ur.usuario_id=u.id)
+       ON u.id=r.usuario_id 
+       WHERE 
+        dr.material_id like :tipo  and
+    
+        ur.rol_id like :coordinacion";
+
+
+        $parameters= [
+            'tipo'=> $tipo ,
+          'coordinacion'=> $coordinacion 
+        ];
+        //subir archivos
+
+     
+        $query=DB::raw($sql);
+        $repositorios= DB::select(DB::raw($sql),$parameters);
+        // ($repositorios); exit;
+       // dd($repositorios); exit; 
+
+       return view ('repositorio.show', compact('repositorios'));
+        
+    
     }
 
     /**

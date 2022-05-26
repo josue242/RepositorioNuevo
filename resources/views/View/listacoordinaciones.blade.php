@@ -49,11 +49,11 @@
                 <div class="p-4 p-lg-5 bg-light rounded-3 text-center">
                     <div class="m-2 m-lg-5">
                      
-                        <form class="row g-3">
-                            
+                        <form class="row g-3" method="post" action="{{ route('lista.store') }}">
+                            @csrf 
                             <div class="col-md-3">
-                                <label for="inputAño" class="form-label">Seleccionar</label>
-                            <select class="form-select" aria-label="Default select example">
+                                <label for="coordinacion" class="form-label">Seleccionar</label>
+                            <select class="form-select" name="coordinacion" aria-label="Default select example">
                                 <option selected>Coordinaciones</option>
                                 @foreach($coordinaciones as $coordinacion)
                                 <option value="{{$coordinacion->id}}">{{$coordinacion->descripcion}}</option>
@@ -61,8 +61,8 @@
                               </select>
                             </div>
                             <div class="col-md-4">
-                                <label for="inputAño" class="form-label">Seleccionar</label>
-                            <select class="form-select" aria-label="Default select example">
+                                <label for="tipo class="form-label">Seleccionar</label>
+                            <select class="form-select" name="tipo" aria-label="Default select example">
                                 @foreach($tipomateriales as $tipo)
                                 <option value="{{$tipo->id}}">{{$tipo->descripcion}}</option>";
                             @endforeach

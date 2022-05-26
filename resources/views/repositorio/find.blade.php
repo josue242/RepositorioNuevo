@@ -2,14 +2,14 @@
   
 @section('content')
 <div class="container px-lg-5">
-    <center>
-    <h1 class="display-8 fw-bold mt-0">COLEGIO DE PROFESIONISTAS, COMPARTIR CONOCIMIENTO</h1>
-    </center>
-    <div class="p-4 p-lg-5 bg-light rounded-3 text-center">
-        <div class="m-2 m-lg-5">
-            
+                    <br>
+                      <br>
             <form class="row g-3" method="post" action="{{ route('busqueda.store') }}">
                 @csrf
+                <center>
+                <h1 class="display-8 fw-bold mt-0">Explora Nuestro Repositorio</h1>
+            <br>    
+            </center>
                 <div class="col-md-4">
                   <label for="tema" class="form-label">Tema</label>
                   <input type="text" class="form-control" id="tema" name="tema">
@@ -37,8 +37,6 @@
                 <select class="form-select" name="mes" aria-label="Default select example">
                     <option selected value="-1">Todos</option>
                    
-                    
-                    
                     <option value="1">Enero</option>
                     <option value="2">Febrero</option>
                     <option value="3">Marzo</option>
@@ -71,7 +69,7 @@
                   @endforeach
                 </select>
               </div>
-              
+              <br>
                 <center>
                 <div class="col-md-6">
                   <button type="submit" class="btn btn-lg btn-warning" style="display: block"><i class="fa-solid fa-magnifying-glass"></i>     buscar</button>
@@ -108,7 +106,6 @@
     font-size: 8ch;
     background-color: rgb(65, 9, 117) !important;
     }
-
     .bg-dark {
         --bs-bg-opacity: 1;
      background-color: rgb(65, 9, 117) !important;
@@ -120,6 +117,7 @@
 </div>
 </div>
 </div>
+<br>
 </header>
 <!-- Page Content-->
 <section class="pt-4">
@@ -130,10 +128,10 @@
 <div class="card bg-light border-0 h-100">
     <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
         <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4">
-            <a class="btn btn-outline-warning" href="{{ url('/filtro') }}" role="button"><i class="fa-solid fa-scale-balanced"></i></a>
+            <a class="btn btn-outline-warning" href="{{route('formulario', ['id' => 6]) }}" role="button"><i class="fa-solid fa-scale-balanced"></i></a>
             
         </div>
-        <a class="btn btn-darck" href="{{ url('/filtro') }}" role="button"><h2 class="fs-4 fw-bold">Propuestas de ley</h2></a>
+        <a class="btn btn-darck" href="{{route('formulario', ['id' => 6]) }}" role="button"><h2 class="fs-4 fw-bold">Propuestas de ley</h2></a>
         
         <p class="mb-0"></p>
     </div>
@@ -143,9 +141,9 @@
 <div class="card bg-light border-0 h-100">
     <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
         <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4">
-            <a class="btn btn-outline-warning" href="{{ url('/filtro') }}" role="button"><i class="fa-solid fa-book"></i></a>
+            <a class="btn btn-outline-warning" href="{{route('formulario', ['id' => 5]) }}" role="button"><i class="fa-solid fa-book"></i></a>
         </div>
-        <a class="btn btn-darck" href="{{ url('/filtro') }}" role="button"><h2 class="fs-4 fw-bold">Articulos</h2></a>
+        <a class="btn btn-darck" href="{{route('formulario', ['id' => 5]) }}" role="button"><h2 class="fs-4 fw-bold">Articulos</h2></a>
    
         <p class="mb-0"></p>
     </div>
@@ -155,9 +153,9 @@
 <div class="card bg-light border-0 h-100">
     <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
         <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4">
-            <a class="btn btn-outline-warning" href="{{ url('/filtro') }}" role="button"><i class="fa-solid fa-file-signature"></i></a>
+            <a class="btn btn-outline-warning" href="{{route('formulario', ['id' => 3]) }}" role="button"><i class="fa-solid fa-file-signature"></i></a>
         </div> 
-        <a class="btn btn-darck" href="{{ url('/filtro') }}" role="button"><h2 class="fs-4 fw-bold">Infografías</h2></a>
+        <a class="btn btn-darck" href="{{route('formulario', ['id' => 3]) }}" role="button"><h2 class="fs-4 fw-bold">Infografías</h2></a>
          
         <p class="mb-0"></p>
     </div>
@@ -167,9 +165,9 @@
 <div class="card bg-light border-0 h-100">
     <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
         <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4">
-            <a class="btn btn-outline-warning" href="{{ url('/filtro') }}" role="button"><i class="fa-solid fa-people-line"></i></a>
+            <a class="btn btn-outline-warning" href="{{route('formulario', ['id' => 4]) }}" role="button"><i class="fa-solid fa-people-line"></i></a>
         </div>
-        <a class="btn btn-darck" href="{{ url('/filtro') }}" role="button"><h2 class="fs-4 fw-bold">Mesa de profesionitas</h2></a>
+        <a class="btn btn-darck" href="{{route('formulario', ['id' => 4]) }}"role="button"><h2 class="fs-4 fw-bold">Mesa de profesionitas</h2></a>
         <p class="mb-0"></p>
     </div>
 </div>
@@ -178,9 +176,9 @@
 <div class="card bg-light border-0 h-100">
     <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
         <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4">
-            <a class="btn btn-outline-warning" href="{{ url('/filtro') }}" role="button"><i class="fa-solid fa-users-between-lines"></i></a>
+            <a class="btn btn-outline-warning" href="{{route('formulario', ['id' => 1]) }}" role="button"><i class="fa-solid fa-users-between-lines"></i></a>
         </div>
-            <a class="btn btn-darck" href="{{ url('/filtro') }}" role="button"><h2 class="fs-4 fw-bold">Talleres</h2></a>
+            <a class="btn btn-darck" href="{{route('formulario', ['id' => 1]) }}" role="button"><h2 class="fs-4 fw-bold">Talleres</h2></a>
        
         <p class="mb-0"></p>
     </div>
@@ -190,10 +188,10 @@
 <div class="card bg-light border-0 h-100">
     <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
         <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4">
-            <a class="btn btn-outline-warning" href="{{ url('/filtro') }}" role="button"><i class="fa-solid fa-people-group"></i></a>
+            <a class="btn btn-outline-warning" href="{{route('formulario', ['id' => 2]) }}"role="button"><i class="fa-solid fa-people-group"></i></a>
         </div>
         
-            <a class="btn btn-darck" href="{{ url('/filtro') }}" role="button"><h2 class="fs-4 fw-bold">Foros</h2></a>
+            <a class="btn btn-darck" href="{{route('formulario', ['id' => 2]) }}"role="button"><h2 class="fs-4 fw-bold">Foros</h2></a>
 
         <p class="mb-0"></p>
     </div>
@@ -203,7 +201,7 @@
 <div class="card bg-light border-0 h-100">
     <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
         <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4">
-            <a class="btn btn-outline-warning" href="{{ url('/filtro') }}" role="button"><i class="fa-solid fa-users-gear"></i></a>
+            <a class="btn btn-outline-warning" href="{{ url('/lista') }}" role="button"><i class="fa-solid fa-users-gear"></i></a>
         </div>
 
             <a class="btn btn-darck" href="{{ url('/lista') }}" role="button"><h2 class="fs-4 fw-bold">Coordinaciones</h2></a>
@@ -219,7 +217,12 @@
 </main>
 <!-- Footer-->
 <footer class="py-5 bg-orange">
-<div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2022</p></div>
+    <center>
+<div class="container"><p class="m-0 text-center text-white">Vista nuestras redes sociales:</p></div>
+<br>
+<a href="https://www.facebook.com/ColegioDeProfesionistas/" target="_blank"><img src="http://www.ariadne-comunicacion.com/blog/wp-content/uploads/2018/01/facebook.png" alt="Facebook"></a>
+    </center>
+</div>
 </footer>
 <!-- Bootstrap core JS-->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>

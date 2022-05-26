@@ -9,26 +9,41 @@
         <div class="m-2 m-lg-5">
             <table class="table responsive">
                 <tbody>
-                @foreach($repositorios as $repo)
+                      
+                @foreach($sql as $sq)
+               
+               
+               
                     <tr>
+                        
                         <td>
-                            {{ $repo->fecha }}
+                            {{ $sq->fecha }}
                         </td>
                        
                         <td>
-                            {{ $repo->documento }}
-                        </td> 
-                       
+                            
+                            {{ $sq->documento }}
+
+                        </td>
+
                         <td>
-                            <button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> View</button></a>
+                           <button class="btn btn-info btn-sm">
+                           <a title="abrir archivo" target="_blank"
+                           href="images/{{ $sq->documento }}"
+                           ><i class="fa fa-eye" aria-hidden="true"></i>Abrir</button> </a>
+                       
                             <button class="btn btn-success btn-sm"><a href="{{ url('/edit') }}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
                             <button type="submit" class="btn btn-danger btn-sm" title="Delete Contact" onclick="return confirm(&quot;Confirm delete?&quot;)"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
                            
-                        </td>                                                               
+                        </td>   
+                        
+        
                     </tr>
                 @endforeach
+             
                 </tbody>
             </table>
+           
             <style>
                 form{
                     display: flex;

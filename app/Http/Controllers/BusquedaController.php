@@ -6,6 +6,8 @@ use App\Models\Rol;
 use Illuminate\Http\Request;
 use App\Models\Tipomaterial;
 use App\Models\Repositorio;
+use App\Models\Repotema;
+use App\Models\Detallerepo;
 use Illuminate\Support\Facades\DB;
 class BusquedaController extends Controller
 {
@@ -17,13 +19,19 @@ class BusquedaController extends Controller
     public function index()
     {
         
-
         $tipomateriales = Tipomaterial::all();
         $coordinaciones = Rol::all();
         return view ('repositorio.find',
         compact('tipomateriales','coordinaciones'));
       
      
+    }
+    public function welcome(){
+        $tipomateriales = Tipomaterial::all();
+        $coordinaciones = Rol::all();
+        return view ('welcome',
+        compact('tipomateriales','coordinaciones'));
+        
     }
     
 
@@ -82,18 +90,18 @@ class BusquedaController extends Controller
             'anio'=> $anio ,
           'coordinacion'=> $coordinacion 
         ];
-       
-      //  echo ("se recibieron datos"); exit;
+        //subir archivos
 
-       
      
         $query=DB::raw($sql);
         $repositorios= DB::select(DB::raw($sql),$parameters);
-        //dd ($repositorios); exit;
+        // ($repositorios); exit;
        // dd($repositorios); exit; 
 
-        return view ('repositorio.show', compact('repositorios'));
+       return view ('repositorio.show', compact('repositorios'));
+        
     }
+  
 
     /**
      * Show the form for editing the specified resource.

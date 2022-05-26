@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-class FiltroController extends Controller
+use App\Models\Repositorio;
+
+class ArchivoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,8 +14,23 @@ class FiltroController extends Controller
      */
     public function index()
     {
-        return view('View.filtrado');
-     
+        //
+    }
+
+    public function store(Request $request)
+    {
+       // $this->validateData($request); 
+       /* $campos=[
+                'titulo' => $request->titulo,
+                'descripcion'   => $request->descripcion,
+                'nomenclatura'  => $request->nomenclatura,
+                'ubicacion'     => $request->ubicacion, ];
+        
+        $repositorio = Repositorio::create($campos);
+        //echo $candidato->nombrecompleto . " se guardo correctamente ... ";
+        dd ($repositorio); exit;
+        return redirect("layouts.dropzone");*/
+        
     }
 
     /**
@@ -33,37 +49,7 @@ class FiltroController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-
-    $titulo = $request->titulo??"";
-    $titulo = "%$titulo%";
-
-
-    $sql ="SELECT * FROM repositorio r INNER JOIN detallerepo dr 
-    ON dr.repositorio_id = r.id  
-    INNER JOIN tipomaterial tp ON tp.id = dr.material_id
-    -- INNER JOIN (usuario u  INNER JOIN usuariorol ur ON ur.usuario_id=u.id)
-    -- ON u.id=r.usuario_id 
-    WHERE 
-     upper(trim(r.documento)) like upper(trim(:titulo)) and 
-     tp.id = 5
     
-
-    ";
-
-       $parameters= [
-        'titulo'=> $titulo,
-       ];
-
-        $query=DB::raw($sql);
-        $repositorios = DB::select(DB::raw($sql),$parameters);
-           //  ($repositorios); exit;
-
-        return view ('repositorio.showinicio', compact('repositorios'));
-        //return view ('repositorio.show', compact('repositorios'));
-        
-    }
 
     /**
      * Display the specified resource.
@@ -71,7 +57,6 @@ class FiltroController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-   
     public function show($id)
     {
         //
