@@ -52,7 +52,7 @@ class ListaCoordinacionController extends Controller
        $coordinacion = $request->coordinacion==-1?"":$request->coordinacion;
        $coordinacion = "%$coordinacion%";
        
-       $sql ="SELECT * FROM repositorio r INNER JOIN (repotema rt 
+       $sql ="SELECT r.id, r.fecha, r.documento FROM repositorio r INNER JOIN (repotema rt 
        INNER JOIN tema t ON rt.tema_id=t.id) 
        ON rt.repositorio_id = r.id 
        INNER JOIN detallerepo dr ON dr.repositorio_id=r.id 
@@ -123,6 +123,30 @@ class ListaCoordinacionController extends Controller
      */
     public function destroy($id)
     {
+        DB::beginTransaction();
+        try{ 
+        Repotema::where('repositorio_id', '=', $id)->delete();
+        Detallerepo::where('repositorio_id', '=', $id)->delete();
+        Repositorio::whereId($id)->delete();
+        DB::commit(); 
+        } catch(Exception $ex){
+            DB::rollBack();
+            echo $ex->getMessage();exit;
+        }
+        return redirect('busqueda');
         //
     }
+    public function download (Repositorio $archivo){
+          
+
+        // $documento=Repositorio:: where ('id', $id)->firstFail();
+          //   $pathToFile = public_path ('images'.$image->documento);
+           //  retun response()->download($pathToFile); 
+     
+                // $repositorio = Repositorio::$id();
+               // dd ($archivo);
+               return response()->download(public_path(('images/'.$archivo->documento)), $archivo->title);
+     
+                 
+             }
 }

@@ -34,7 +34,8 @@ Route::get('/', function () {
 });
 
 Route::get('welcome', [BusquedaController::class,'welcome']);
-
+Route::get('download/{archivo}', [DropzoneController::class,'download'])->name('download');
+Route::get('download/{archivo}', [FiltradoController::class,'download'])->name('download');
 Route::resource('tema', TemaController::class);
 Route::resource('template', TemplateController::class);
 //Route::resource('filtro', FiltroController::class);
@@ -42,7 +43,8 @@ Route::resource('lista', ListaCoordinacionController::class);
 Route::resource('edit', AltaController::class);
 Route::get('dropzone', [DropzoneController::class,'dropzone']);
 Route::post('dropzone-store', [DropzoneController::class,'dropzoneStore'])->name('dropzone.store');
-Auth::routes(['register'=> true, 'reset' => true, 'verify'=>true]);
+
+Auth::routes(['register'=> true, 'reset' => false, 'verify'=>false]);
 //Route::post('archivo-store', [ArchivoController::class,'store'])->name('archivo.store');
 
 //Route::get('/login', [LoginController::class, 'login'])->name('login');
@@ -57,4 +59,6 @@ Route::resource('busqueda', BusquedaController::class);
 //Route::get('repositorio', [RepositorioController::class,'index'])->name('index');
 // rutas  // //
 Route::get('formulario/{id}', [FiltradoController::class,'formularioBusqueda'])->name('formulario');
-Route::post('filtrado', [FiltradoController::class, 'filtradoRespuesta'])->name('filtrado');
+Route::post('filtrado', [FiltradoController::class,'filtradoRespuesta'])->name('filtrado');
+Route::delete('delete/{id}', [FiltradoController::class,'delete'])->name('delete');
+

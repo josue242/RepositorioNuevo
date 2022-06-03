@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Models\Rol;
 use Illuminate\Http\Request;
 use App\Models\Tipomaterial;
@@ -69,7 +70,7 @@ class BusquedaController extends Controller
        $coordinacion = $request->coordinacion==-1?"":$request->coordinacion;
        $coordinacion = "%$coordinacion%";
        
-       $sql ="SELECT * FROM repositorio r INNER JOIN (repotema rt 
+       $sql ="SELECT r.id, r.fecha, r.documento FROM repositorio r INNER JOIN (repotema rt 
        INNER JOIN tema t ON rt.tema_id=t.id) 
        ON rt.repositorio_id = r.id 
        INNER JOIN detallerepo dr ON dr.repositorio_id=r.id 
@@ -111,7 +112,8 @@ class BusquedaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $repositorios = Repositorio::find($id);
+        return view ('repositorio.edit', compact('repositorios'));
     }
 
     /**
@@ -122,9 +124,38 @@ class BusquedaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
-        //
-    }
+    
+        {
+            $this->validateData($request);
+       
+            $archivo = "";
+            if ($request->hasFile('file')) {
+                $file = $request->file('file');
+                $archivo = $file->getClientOriginalName();
+            }
+            $currentValue = Repositorio::find($id);
+        
+        if (empty($archivo)) $archivo = $currentValue->file;
+             $campos=[
+                'file'           => $archivo,
+                 'documento'     => $request->documento,
+                 'descripcion'   => $request->descripcion,
+                 
+             ];
+             if ($request->hasFile('file')) $file->move(public_path('images'), $archivo);
+             
+             Repositorio::whereId($id)->update($campos);
+             return redirect('busqueda')->with('success', 'Actualizado correctamente...');
+         }
+     
+    
+         function validateData(Request $request)
+         {
+             $request->validate([
+                 'documento' => 'required|max:200',
+                 'descripcion' => 'required'
+             ]);
+         }
 
     /**
      * Remove the specified resource from storage.
@@ -132,8 +163,24 @@ class BusquedaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    
+
+        public function destroy($id)
     {
-        //
+        DB::beginTransaction();
+        try{ 
+        Repotema::where('repositorio_id', '=', $id)->delete();
+        Detallerepo::where('repositorio_id', '=', $id)->delete();
+        Repositorio::whereId($id)->delete();
+        DB::commit(); 
+        } catch(Exception $ex){
+            DB::rollBack();
+            echo $ex->getMessage();exit;
+        }
+        return redirect('busqueda');
+        
     }
+
+        //
+    
 }

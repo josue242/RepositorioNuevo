@@ -43,8 +43,9 @@
         <header class="py-5">
            
             <div class="container px-lg-7">
+         <a class="btn btn-primary" href="{{ url('busqueda') }}" role="button"><i class="fa fa-chevron-circle-left" aria-hidden="true"></i>Regresar</a>
                 <center>
-                <h1 class="display-5 fw-bold mt-0">EXPLORAR</h1>
+                <h1 class="display-5 fw-bold mt-0">COORDINACIONES</h1>
                 </center>
                 <div class="p-4 p-lg-5 bg-light rounded-3 text-center">
                     <div class="m-2 m-lg-5">

@@ -55,8 +55,7 @@
         </nav>
     </head>
     <br>
-    <br>
-    <br>
+    
     <style>
         form{
             display: flex;
@@ -111,32 +110,37 @@
         }
     </style>
                 </form>
+                <h1 class="display-8 fw-bold mt-0">COLEGIO DE PROFESIONISTAS, COMPARTIR CONOCIMIENTO</h1>
                 <section style= "pading-top:60px">
+
                     <div class="container">
+                     <a class="btn btn-primary" href="{{ url()->previous() }}" role="button"><i class="fa fa-chevron-circle-left" aria-hidden="true"></i>
+Regresar</a>
+<br>
+<br>
                 <div class="row-3">
                     <div class="col-md-12">
+                      <div class="car-uper">
                         <div class="card">
                            
-                            
+                           
                             <div class="card-header">
                                 Subir Archivo
                             </div>
                             <div class="card-body">
-                                <form class = "row g-3" action="{{route('dropzone.store')}}" method= "POST"  enctype="multipart/form-data" class="dropzone dz-clickable" 
+                                
+                                <form class = "row g-3" action="{{route('dropzone.store')}}" method= "POST"  enctype="multipart/form-data"  
                                 >
                                 <div class="form-group">
-                                    @csrf
-                                    <label for="foto">Archivo:</label>
-                                    <input type="file" id="file" accept="image/png, image/jpeg, image/pdf" 
-                                     class="form-control" name="file" 
-                                     onchange="previewImage(event,'file');"
-                                      />
-                                      <img src="" id="file" >
-                                </div>
+                                @csrf
+                                <label for="file">Archivo:</label>
+                                <input type="file" id="file" accept="image/png, image/jpeg " 
+                                 class="form-control" name="file" 
+                                 onchange="previewImage(event,'archivo');"
+                                  />
+                                  <img src="" id="archivo" width="200px" height="200px">
+                            </div>
 
-                                   
-                                    @csrf
-                                    
                                         <div class="col-md-4">
                                             <label for="documento" class="form-label">Titulo</label>
                                             <input type="text" class="form-control" id="documento" name="documento">
@@ -177,7 +181,8 @@
                                 <br>
                             </div>
                            
-                              
+                              <br>
+                              <br>
                                 <center>
                                     <button type="submit" class="btn btn-warning btn-lg">Guardar</button>
                                     <button type="submit" class="btn btn-danger btn-lg">Cancelar</button>
@@ -192,7 +197,7 @@
 
                         </div>
                     </div>
-                    
+                    </div>
                 </div>
                
             </div>

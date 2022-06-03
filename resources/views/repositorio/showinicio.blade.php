@@ -1,18 +1,33 @@
 @extends('plantilla')
   
 @section('content')
-<div class="container px-lg-5">
+<div class="container px-lg-1">
+<br>
+
+ <a class="btn btn-primary" href="{{ url()->previous() }}" role="button"><i class="fa fa-chevron-circle-left" aria-hidden="true"></i>
+Regresar</a>
     <center>
     <h1 class="display-8 fw-bold mt-0">COLEGIO DE PROFESIONISTAS, COMPARTIR CONOCIMIENTO</h1>
     </center>
+   
     <div class="p-4 p-lg-5 bg-light rounded-3 text-center">
+     
         <div class="m-2 m-lg-5">
-            <table class="table responsive">
+        
+             <table class="table responsive table-striped">
                 <tbody>
+                        <tr>
+     
+      <th scope="col">Fecha</th>
+      <th scope="col">Archivo</th>
+      <th scope="col">Acciones</th>
+    </tr>
                       
                 @foreach($sql as $sq)
                
-               
+                <form action="{{ route('delete', $sq->id)}}"
+                    method="post">
+                    @csrf
                
                     <tr>
                         
@@ -27,16 +42,20 @@
                         </td>
 
                         <td>
-                           <button class="btn btn-info btn-sm">
-                           <a title="abrir archivo" target="_blank"
-                           href="images/{{ $sq->documento }}"
-                           ><i class="fa fa-eye" aria-hidden="true"></i>Abrir</button> </a>
-                       
-                            <button class="btn btn-success btn-sm"><a href="{{ url('/edit') }}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
-                            <button type="submit" class="btn btn-danger btn-sm" title="Delete Contact" onclick="return confirm(&quot;Confirm delete?&quot;)"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
+                            <a class="btn btn-primary  btn-sm" title="abrir archivo" target="_blank" href="images/{{ $sq->documento }}" role="button"><i class="fa fa-eye" aria-hidden="true"></i>
+                                Abrir</a>
+                                               
+                                                           <a class="btn btn-success  btn-sm"  href="{{ url('/edit') }}" role="button"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                Editar</a>
+                                
+                                @method('DELETE')
+                                                            <button type="submit" class="btn btn-danger btn-sm" title="Delete Contact" onclick="return confirm(&quot;Confirm delete?&quot;)"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
+                                                           
+                                                            <a class="btn btn-warning  btn-sm"  href="{{ url('download/'.$sq->id) }}" role="button"><i class="fa fa-download" aria-hidden="true"></i>
+                                                                Descargar</a>
                            
                         </td>   
-                        
+                    </form>  
         
                     </tr>
                 @endforeach

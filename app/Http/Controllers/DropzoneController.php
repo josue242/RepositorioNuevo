@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\Models\Repositorio;
 use App\Models\Tipomaterial;
@@ -22,13 +23,15 @@ class DropzoneController extends Controller
     
     public function dropzoneStore(Request $request)
     {
-        $image = $request->file('file');
+        $this->validateData($request);
        
-        $imageName = time(). '.' .$image->extension();//
-        $image->move(public_path('images'),$imageName);
-       // return response()->json(['success'=>$imageName]);
-
+        $archivo = "";
+        if ($request->hasFile('file')) {
+            $file = $request->file('file');
+            $archivo = $file->getClientOriginalName();
+        }
         $campos=[
+            'file'           => $archivo,
             'documento'        => $request->documento,
             'descripcion'   => $request->descripcion,
             'nomenclatura'  => $request->nomenclatura,
@@ -37,7 +40,8 @@ class DropzoneController extends Controller
         ];
         $material_id= $request->tipo;
         $tema_id= $request->tema;
-    
+        if ($request->hasFile('file')) $file->move(public_path('images'), $archivo);
+   
     DB::beginTransaction();
     try {
         $repositorio = Repositorio::create($campos);
@@ -68,11 +72,11 @@ class DropzoneController extends Controller
     }
 
     function validateData(Request $request)
-    {/*
+    {
         $request->validate([
-            'titulo' => 'required|max:200',
+            'documento' => 'required|max:200',
             'descripcion' => 'required'
-        ]);*/
+        ]);
     }
 
     /**
@@ -81,10 +85,24 @@ class DropzoneController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+   public function store(Request $request)
     {
-        
+        //Storage::disk('local')->put('example.txt', 'Contents');
     }
 
-    
-}
+  
+        public function download (Repositorio $archivo){
+          
+
+   // $documento=Repositorio:: where ('id', $id)->firstFail();
+     //   $pathToFile = public_path ('images'.$image->documento);
+      //  retun response()->download($pathToFile); 
+
+           // $repositorio = Repositorio::$id();
+          // dd ($archivo);
+          return response()->download(public_path(('images/'.$archivo->documento)), $archivo->title);
+
+            
+        }
+ 
+    }
