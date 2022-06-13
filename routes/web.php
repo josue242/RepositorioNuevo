@@ -28,10 +28,6 @@ use App\Models\Rol;
 |
 */
 
-Route::get('/', function () {
-
-    return view('welcome' );
-});
 
 Route::get('welcome', [BusquedaController::class,'welcome']);
 Route::get('download/{archivo}', [DropzoneController::class,'download'])->name('download');
@@ -40,6 +36,7 @@ Route::resource('tema', TemaController::class);
 Route::resource('template', TemplateController::class);
 //Route::resource('filtro', FiltroController::class);
 Route::resource('lista', ListaCoordinacionController::class);
+Route::resource('filtrados', ArchivoController::class);
 Route::resource('edit', AltaController::class);
 Route::get('dropzone', [DropzoneController::class,'dropzone']);
 Route::post('dropzone-store', [DropzoneController::class,'dropzoneStore'])->name('dropzone.store');

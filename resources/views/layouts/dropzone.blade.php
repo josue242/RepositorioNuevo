@@ -24,7 +24,8 @@
         <!-- Styles -->
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
          <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/app.js') }}" ></script>
+    <script src="{{ asset('js/custom.js') }}"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -110,7 +111,9 @@
         }
     </style>
                 </form>
+                <center>
                 <h1 class="display-8 fw-bold mt-0">COLEGIO DE PROFESIONISTAS, COMPARTIR CONOCIMIENTO</h1>
+                </center>
                 <section style= "pading-top:60px">
 
                     <div class="container">
@@ -131,15 +134,17 @@ Regresar</a>
                                 
                                 <form class = "row g-3" action="{{route('dropzone.store')}}" method= "POST"  enctype="multipart/form-data"  
                                 >
+                                 @csrf
                                 <div class="form-group">
-                                @csrf
-                                <label for="file">Archivo:</label>
-                                <input type="file" id="file" accept="image/png, image/jpeg " 
-                                 class="form-control" name="file" 
-                                 onchange="previewImage(event,'archivo');"
-                                  />
-                                  <img src="" id="archivo" width="200px" height="200px">
-                            </div>
+                                 
+                                    <label for="file">Archivo:</label>
+                                    <input type="file" id="file" accept="application/pdf, image/png, image/jpeg"
+                                     class="form-control" name="file[]" multiple   
+                                     onchange="preview(event, 'preview' );" />
+                                      
+                                </div>
+                                <div id="preview" ></div>
+
 
                                         <div class="col-md-4">
                                             <label for="documento" class="form-label">Titulo</label>
@@ -175,7 +180,10 @@ Regresar</a>
                                             <label for="ubicacion" class="form-label">Ubicacion</label>
                                             <input type="text" class="form-control" id="ubicacion" name="ubicacion">
                                           </div>
-                                   
+                                          <div class="col-md-4">
+                                            <label for="url" class="form-label">Url (En caso de ser un video) </label>
+                                            <input type="text" class="form-control" id="url" name="url">
+                                          </div>
                                 </div>
                                 <br>
                                 <br>
@@ -211,16 +219,9 @@ Regresar</a>
 
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/6.0.0-beta.2/dropzone-min.min.js" integrity="sha512-ALYIaHxbPRTWdNH4oNgOY8QUEVxukOdn2e/Z4dXcGGnY0mHGg4556b6sWH7KMEDzEMG9V9tvXZoYk21s7FMz2A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/6.0.0-beta.2/dropzone-min.js" integrity="sha512-FFyHlfr2vLvm0wwfHTNluDFFhHaorucvwbpr0sZYmxciUj3NoW1lYpveAQcx2B+MnbXbSrRasqp43ldP9BKJcg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/min/dropzone.min.js" integrity="sha512-9WciDs0XP20sojTJ9E7mChDXy6pcO0qHpwbEJID1YVavz2H6QBz5eLoDD8lseZOb2yGT8xDNIV7HIe1ZbuiDWg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-   
-
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/6.0.0-beta.2/basic.min.css" integrity="sha512-MeagJSJBgWB9n+Sggsr/vKMRFJWs+OUphiDV7TJiYu+TNQD9RtVJaPDYP8hA/PAjwRnkdvU+NsTncYTKlltgiw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <body>
 
 

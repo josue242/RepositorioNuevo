@@ -52,7 +52,7 @@ class ListaCoordinacionController extends Controller
        $coordinacion = $request->coordinacion==-1?"":$request->coordinacion;
        $coordinacion = "%$coordinacion%";
        
-       $sql ="SELECT r.id, r.fecha, r.documento FROM repositorio r INNER JOIN (repotema rt 
+       $sql ="SELECT r.id, r.fecha, r.documento, r.file FROM repositorio r INNER JOIN (repotema rt 
        INNER JOIN tema t ON rt.tema_id=t.id) 
        ON rt.repositorio_id = r.id 
        INNER JOIN detallerepo dr ON dr.repositorio_id=r.id 
@@ -75,10 +75,32 @@ class ListaCoordinacionController extends Controller
         $repositorios= DB::select(DB::raw($sql),$parameters);
         // ($repositorios); exit;
        // dd($repositorios); exit; 
+       $id_usuario = session("usuario_id");
+      //$id_usuario = $_SESSION['user'];
+       
+      $sql="SELECT r.id,r.descripcion FROM rol r INNER JOIN usuariorol ur
+      ON r.id=ur.rol_id 
+      WHERE ur.usuario_id =:usuario";
+      
+      $query=DB::raw($sql);
+      //dd($query);
+      $consulta= DB::select(DB::raw($sql),['usuario'=>$id_usuario]);
+      //dd($consulta);
+      
+      return view ('repositorio.show', compact('repositorios','consulta'))->with('esAdministrador',$this->isAdmin($consulta));
 
-       return view ('repositorio.show', compact('repositorios'));
+      
         
     
+    }
+    private function isAdmin($filas){
+        foreach ($filas as $fila){
+            if (in_array( $fila->id, [1,2] )){
+                return true;
+            }
+            
+        }
+        return false;
     }
 
     /**
@@ -145,7 +167,7 @@ class ListaCoordinacionController extends Controller
      
                 // $repositorio = Repositorio::$id();
                // dd ($archivo);
-               return response()->download(public_path(('images/'.$archivo->documento)), $archivo->title);
+               return response()->download(public_path(('images/'.$archivo)), $archivo);
      
                  
              }

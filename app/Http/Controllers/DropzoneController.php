@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\Models\Repositorio;
@@ -11,6 +11,7 @@ use App\Models\Repotema;
 use App\Models\Tema;
 use Illuminate\Support\Facades\DB;
 class DropzoneController extends Controller
+
 {
     public function dropzone(){
         $tipomateriales = Tipomaterial::all();
@@ -25,22 +26,31 @@ class DropzoneController extends Controller
     {
         $this->validateData($request);
        
-        $archivo = "";
-        if ($request->hasFile('file')) {
-            $file = $request->file('file');
-            $archivo = $file->getClientOriginalName();
-        }
+$fileNames="";
+foreach($request->file('file') as $file)
+{
+    $name=$file->getClientOriginalName();
+    $file->move(public_path('images'), $name);
+    $fileNames = $fileNames.$name."|"; 
+            }
+    $fileNames=$fileNames.substr($fileNames,0,strlen($fileNames)-1);
+       
+ 
         $campos=[
-            'file'           => $archivo,
+            'file'           => $fileNames
+            ,
             'documento'        => $request->documento,
             'descripcion'   => $request->descripcion,
             'nomenclatura'  => $request->nomenclatura,
             'ubicacion'     => $request->ubicacion, 
+            'url'           => $request->url,
             'fecha'=> date('Y-m-d'),
+            'usuario_id'=>session('usuario_id'),
         ];
+      
         $material_id= $request->tipo;
         $tema_id= $request->tema;
-        if ($request->hasFile('file')) $file->move(public_path('images'), $archivo);
+      //  if ($request->hasFile('file')) $file->move(public_path('images'), $fi);
    
     DB::beginTransaction();
     try {
@@ -92,15 +102,15 @@ class DropzoneController extends Controller
 
   
         public function download (Repositorio $archivo){
-          
+           
+    
+ // foreach( preg_split("/\|/",$archivo->file) as $archivo){
 
-   // $documento=Repositorio:: where ('id', $id)->firstFail();
-     //   $pathToFile = public_path ('images'.$image->documento);
-      //  retun response()->download($pathToFile); 
+  //}
 
-           // $repositorio = Repositorio::$id();
-          // dd ($archivo);
-          return response()->download(public_path(('images/'.$archivo->documento)), $archivo->title);
+
+  
+          return response()->download(public_path(('images/'.$archivo)), $archivo);
 
             
         }

@@ -109,16 +109,18 @@
                         <br>
                         <br>
                         <br>
-                        <div class="container px-lg-5">
-                            <div class="d-grid gap-2 col-5 mx-auto">
-                            <a class="btn btn-warning" href="{{ url('/dropzone') }}" role="button">Subir Archivo</a> 
-                        </div>
-
-                        <br>
-                        <br>
+                        
                         
                 </form>
-
+                @if (!$esAdministrador)
+                <div class="container px-lg-5">
+                    <div class="d-grid gap-2 col-5 mx-auto">
+                    <a class="btn btn-warning" href="{{ url('/dropzone') }}" role="button">Subir Archivo</a> 
+                </div>
+                @else
+                @endif 
+                <br>
+                <br>
                 </div>
                 </div>
 
@@ -149,7 +151,7 @@
                         <td>
                            
                     
-                                   <a class="btn btn-primary  btn-sm" title="abrir archivo" target="_blank" href="images/{{ $ti->documento }}" role="button"><i class="fa fa-eye" aria-hidden="true"></i>
+                                   <a class="btn btn-primary  btn-sm" title="abrir archivo" target="_blank" href="images/{{ $ti->file }}" role="button"><i class="fa fa-eye" aria-hidden="true"></i>
 Abrir</a>
                
                            <a class="btn btn-success  btn-sm"  href="{{ url('/edit') }}" role="button"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>

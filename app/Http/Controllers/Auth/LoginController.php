@@ -80,6 +80,7 @@ class LoginController extends Controller
 
         if ($usuario && Hash::check($request['password'],$usuario->password)){
             $_SESSION['user']=$usuario->id;
+            session(['usuario_id'=>$usuario->id]);
          //   dd($usuario);
         }
         

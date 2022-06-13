@@ -61,6 +61,8 @@ class BusquedaController extends Controller
        $tema = "%$tema%";
        $titulo = $request->titulo??"";
        $titulo = "%$titulo%";
+    
+       $file = "";
        $anio = $request->anio==-1?"":$request->anio;
        $anio = "%$anio%";
        $mes = $request->mes==-1?"":$request->mes;
@@ -70,7 +72,7 @@ class BusquedaController extends Controller
        $coordinacion = $request->coordinacion==-1?"":$request->coordinacion;
        $coordinacion = "%$coordinacion%";
        
-       $sql ="SELECT r.id, r.fecha, r.documento FROM repositorio r INNER JOIN (repotema rt 
+       $sql ="SELECT r.id, r.fecha, r.documento, r.file FROM repositorio r INNER JOIN (repotema rt 
        INNER JOIN tema t ON rt.tema_id=t.id) 
        ON rt.repositorio_id = r.id 
        INNER JOIN detallerepo dr ON dr.repositorio_id=r.id 
@@ -84,24 +86,58 @@ class BusquedaController extends Controller
         ur.rol_id like :coordinacion";
 
 
+
+
         $parameters= ['tema'=> $tema,
             'tipo'=> $tipo ,
             'titulo'=> $titulo,
             'mes'=> $mes ,
             'anio'=> $anio ,
-          'coordinacion'=> $coordinacion 
+          'coordinacion'=> $coordinacion,
+          
+        
         ];
+
+       
         //subir archivos
 
      
         $query=DB::raw($sql);
+       
         $repositorios= DB::select(DB::raw($sql),$parameters);
+    
         // ($repositorios); exit;
        // dd($repositorios); exit; 
 
-       return view ('repositorio.show', compact('repositorios'));
+      //Consultar roles y permisos
+      $id_usuario = session("usuario_id");
+      //$id_usuario = $_SESSION['user'];
+       
+      $sql="SELECT r.id,r.descripcion FROM rol r INNER JOIN usuariorol ur
+      ON r.id=ur.rol_id 
+      WHERE ur.usuario_id =:usuario";
+      
+      $query=DB::raw($sql);
+      //dd($query);
+      $consulta= DB::select(DB::raw($sql),['usuario'=>$id_usuario]);
+      //dd($consulta);
+      
+      return view ('repositorio.show', compact('repositorios','consulta'))->with('esAdministrador',$this->isAdmin($consulta));
+       
+   }
+
+
+   private function isAdmin($filas){
+       foreach ($filas as $fila){
+           if (in_array( $fila->id, [1,2] )){
+               return true;
+           }
+           
+       }
+       return false;
+   }
         
-    }
+    
   
 
     /**
@@ -128,21 +164,26 @@ class BusquedaController extends Controller
         {
             $this->validateData($request);
        
-            $archivo = "";
-            if ($request->hasFile('file')) {
-                $file = $request->file('file');
-                $archivo = $file->getClientOriginalName();
-            }
+            $fileNames="";
+            foreach($request->file('file') as $file)
+            {
+                $name=$file->getClientOriginalName();
+                $file->move(public_path('images'), $name);
+                $fileNames = $fileNames.$name."|";  
+                        }
+                $fileNames=$fileNames.substr($fileNames,0,strlen($fileNames)-1);
+                        
             $currentValue = Repositorio::find($id);
         
-        if (empty($archivo)) $archivo = $currentValue->file;
+        if (empty($fileNames)) $fileNames = $currentValue->file;
              $campos=[
-                'file'           => $archivo,
+                'file'           => $fileNames,
                  'documento'     => $request->documento,
                  'descripcion'   => $request->descripcion,
+                 'url'           => $request->url
                  
              ];
-             if ($request->hasFile('file')) $file->move(public_path('images'), $archivo);
+             
              
              Repositorio::whereId($id)->update($campos);
              return redirect('busqueda')->with('success', 'Actualizado correctamente...');

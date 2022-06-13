@@ -1,7 +1,7 @@
 @extends('plantilla')
   
 @section('content')
-<div class="container px-lg-1">
+
 <br>
 
  <a class="btn btn-primary" href="{{ url()->previous() }}" role="button"><i class="fa fa-chevron-circle-left" aria-hidden="true"></i>
@@ -18,7 +18,10 @@ Regresar</a>
      
       <th scope="col">Fecha</th>
       <th scope="col">Archivo</th>
+      
       <th scope="col">Acciones</th>
+      
+  
     </tr>
    
                 @foreach($repositorios as $repo)
@@ -40,30 +43,35 @@ Regresar</a>
                         </td>
 
                         <td>
-                           
-                    
-                                   <a class="btn btn-primary  btn-sm" title="abrir archivo" target="_blank" href="images/{{ $repo->documento }}" role="button"><i class="fa fa-eye" aria-hidden="true"></i>
-Abrir</a>
-               
-                           <a class="btn btn-success  btn-sm" href="{{ route('busqueda.edit', $repo->id)}}" role="button"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-Editar</a>
+                            @foreach( preg_split("/\|/",$repo->file) as $archivo)
+                            <a href="images/{{$archivo}}" target="_blank">
+                            {{$archivo}} <br> </a>
+                        @endforeach
+                        </td>
+                        
+           
+                        <td>
+              
+                            <a class="btn btn-warning  btn-sm"     href="{{ url('download/'.$repo->id) }}"     role="button"><i class="fa fa-download" aria-hidden="true"></i>
+  Descargar</a>
+             </td>  
 
-<!-- boton editar -->
-  
-        <!-- boton eliminar -->
-
-  
+  <td>
+    @php 
+    @endphp
+    @if ($esAdministrador === true)
         
         @method('DELETE')
         <button type="submit" class="btn btn-danger btn-sm" title="Delete Contact" onclick="return confirm(&quot;Confirm delete?&quot;)"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
+</td>
+<td>                   
 
-      
-
-                           
-                          <a class="btn btn-warning  btn-sm"  href="{{ url('download/'.$repo->id) }}" role="button"><i class="fa fa-download" aria-hidden="true"></i>
-Descargar</a>
-
-                        </td>   
+               
+    <a class="btn btn-success  btn-sm"  href="{{ route('busqueda.edit', $repo->id)}}" role="button"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+Editar</a>
+</td>       
+@else
+@endif 
                     </form>           
         
                     </tr>

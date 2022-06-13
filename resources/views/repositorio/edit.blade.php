@@ -25,6 +25,7 @@
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
          <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/custom.js') }}"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -148,13 +149,21 @@
                 value="{{$repositorios->descripcion}}"
                 class="form-control" name="descripcion" />
             </div>
-              
-            <div class="form-group">
-                <label for="file">Archivo:</label>
-                <img src="images/{{$repositorios->file}}" height="100px"  width="100px" >
-                <input type="file" id="file" accept="images/png, images/jpeg" 
-                 class="form-control" name="file" />
+            <div class="col-md-6">
+                <label for="url" class="form-label">URL</label>
+                <input type="text" class="form-control form-control-lg" id="url" name="url"
+                value="{{$repositorios->url}}"
+                class="form-control" name="url" />
             </div>
+            <div class="form-group">
+                                 
+                <label for="file">Archivo:</label>
+                <input type="file" id="file" accept="application/pdf, image/png, image/jpeg"
+                 class="form-control" name="file[]" multiple   
+                 onchange="preview(event, 'preview' );" />
+                  
+            </div>
+            <div id="preview" ></div>
 
 
         </div>
