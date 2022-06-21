@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
@@ -10,75 +11,81 @@ use App\Models\Detallerepo;
 use App\Models\Repotema;
 use App\Models\Tema;
 use Illuminate\Support\Facades\DB;
+
 class DropzoneController extends Controller
 
 {
-    public function dropzone(){
+    public function dropzone()
+  {
+
+
+
+    
+    
         $tipomateriales = Tipomaterial::all();
         $tema = Tema::all();
-        return view ('layouts.dropzone',
-        compact('tipomateriales', 'tema'));
-
-        
+        return view(
+            'layouts.dropzone',
+            compact('tipomateriales', 'tema'));
     }
-    
+
     public function dropzoneStore(Request $request)
     {
         $this->validateData($request);
-       
-$fileNames="";
-foreach($request->file('file') as $file)
-{
-    $name=$file->getClientOriginalName();
-    $file->move(public_path('images'), $name);
-    $fileNames = $fileNames.$name."|"; 
+
+        $fileNames = "";
+        if ($request->file('file'))
+            foreach ($request->file('file') as $file) {
+                $name = $file->getClientOriginalName();
+                $file->move(public_path('images'), $name);
+                $fileNames = $fileNames . $name . "|";
             }
-    $fileNames=$fileNames.substr($fileNames,0,strlen($fileNames)-1);
-       
- 
-        $campos=[
-            'file'           => $fileNames
-            ,
+        $fileNames =substr($fileNames, 0, strlen($fileNames) - 1);
+
+
+        $campos = [
+            'file'           => $fileNames,
             'documento'        => $request->documento,
             'descripcion'   => $request->descripcion,
-            'nomenclatura'  => $request->nomenclatura,
-            'ubicacion'     => $request->ubicacion, 
+            //'nomenclatura'  => $request->nomenclatura,
+            'ubicacion'     => $request->ubicacion,
             'url'           => $request->url,
-            'fecha'=> date('Y-m-d'),
-            'usuario_id'=>session('usuario_id'),
+            'fecha'         => $request->fecha,
+           // 'fecha' => date('Y-m-d'),
+            'usuario_id' => session('usuario_id'),
         ];
-      
-        $material_id= $request->tipo;
-        $tema_id= $request->tema;
-      //  if ($request->hasFile('file')) $file->move(public_path('images'), $fi);
-   
-    DB::beginTransaction();
-    try {
-        $repositorio = Repositorio::create($campos);
-        $detallerepo = [
-            "repositorio_id"=>$repositorio->id,
-            "material_id"=>$material_id,
-            "cantidad"=>1
-        ];
-        $repotema = [
-            "repositorio_id"=>$repositorio->id,
-            "tema_id"=>$tema_id
-            
-        ];
-      
-        Detallerepo::create($detallerepo);
-        Repotema::create($repotema);
-        //...
-        DB::commit();
-    } catch(\Exception  $ex){
-        $message = $ex->getMessage();
 
-        DB::rollback();
-        echo "$message"; exit;
-    }
+        $material_id = $request->tipo;
+        $tema_id = $request->tema;
+        //  if ($request->hasFile('file')) $file->move(public_path('images'), $fi);
 
-    return redirect("dropzone");
+        DB::beginTransaction();
+        try {
+            $repositorio = Repositorio::create($campos);
+            $detallerepo = [
+                "repositorio_id" => $repositorio->id,
+                "material_id" => $material_id,
+                "cantidad" => 1
+            ];
+            $repotema = [
+                "repositorio_id" => $repositorio->id,
+                "tema_id" => $tema_id
 
+            ];
+
+            Detallerepo::create($detallerepo);
+            Repotema::create($repotema);
+            //...
+            DB::commit();
+        } catch (\Exception  $ex) {
+            $message = $ex->getMessage();
+
+            DB::rollback();
+            echo "$message";
+            exit;
+        }
+
+        return redirect("dropzone");
     }
 
     function validateData(Request $request)
@@ -95,24 +102,22 @@ foreach($request->file('file') as $file)
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-   public function store(Request $request)
+    public function store(Request $request)
     {
         //Storage::disk('local')->put('example.txt', 'Contents');
     }
 
-  
-        public function download (Repositorio $archivo){
-           
-    
- // foreach( preg_split("/\|/",$archivo->file) as $archivo){
 
-  //}
+    public function download(Repositorio $archivo)
+    {
 
 
-  
-          return response()->download(public_path(('images/'.$archivo)), $archivo);
+        // foreach( preg_split("/\|/",$archivo->file) as $archivo){
 
-            
-        }
- 
+        //}
+
+
+
+        return response()->download(public_path(('images/' . $archivo)), $archivo);
     }
+}

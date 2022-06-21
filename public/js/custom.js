@@ -4,7 +4,16 @@ function preview(event, divDestination){
         let iframe = document.createElement("iframe");
         iframe.src = src;
         var destination = document.getElementById(divDestination);
-        destination.appendChild(iframe);
+     
+
+        let div = document.createElement("div");
+        let p = document.createElement("p");
+        p.text = "X"; 
+        div.appendChild(p);
+        div.appendChild(iframe);
+        destination.appendChild(div);
+        
+
         destination.style.display = "block";
     };
 }

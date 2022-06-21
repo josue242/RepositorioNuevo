@@ -20,12 +20,32 @@ class BusquedaController extends Controller
     public function index()
     {
         
+    $id_usuario = session("usuario_id");
+    //$id_usuario = $_SESSION['user'];
+     
+    $sql2="SELECT r.id,r.descripcion FROM rol r INNER JOIN usuariorol ur
+    ON r.id=ur.rol_id 
+    WHERE ur.usuario_id =:usuario";
+    
+    $query=DB::raw($sql2);
+    //dd($query);
+    $consulta= DB::select(DB::raw($sql2),['usuario'=>$id_usuario]);
+        
         $tipomateriales = Tipomaterial::all();
         $coordinaciones = Rol::all();
         return view ('repositorio.find',
-        compact('tipomateriales','coordinaciones'));
+        compact('tipomateriales','coordinaciones'))->with('esAdministrador',$this->isAdmin2($consulta));
       
      
+    }
+    private function isAdmin2($filas){
+        foreach ($filas as $fila){
+            if (in_array( $fila->id, [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25] )){
+                return true;
+            }
+            
+        }
+        return false;
     }
     public function welcome(){
         $tipomateriales = Tipomaterial::all();
@@ -34,6 +54,7 @@ class BusquedaController extends Controller
         compact('tipomateriales','coordinaciones'));
         
     }
+  
     
 
 
@@ -165,13 +186,14 @@ class BusquedaController extends Controller
             $this->validateData($request);
        
             $fileNames="";
+            if ($request->file('file'))
             foreach($request->file('file') as $file)
             {
                 $name=$file->getClientOriginalName();
                 $file->move(public_path('images'), $name);
                 $fileNames = $fileNames.$name."|";  
                         }
-                $fileNames=$fileNames.substr($fileNames,0,strlen($fileNames)-1);
+                $fileNames=substr($fileNames,0,strlen($fileNames)-1);
                         
             $currentValue = Repositorio::find($id);
         

@@ -44,10 +44,12 @@
                 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!"><i class="fa fa-home" aria-hidden="true"></i>
-                             home</a></li>
                         
-                        <li class="nav-item"><a class="nav-link" href="#!"><i class="fa-solid fa-user"></i> usuario</a></li>
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="{{ url('busqueda') }}"><i class="fa fa-home" aria-hidden="true"></i>
+                             home</a></li>
+                       
+                             <li class="nav-item"><a class="nav-link" href="{{ url('/mostrar') }}"><i class="fa-solid fa-user"></i> {{ auth()->user()->name }}</a>
+
                     </ul>
                     
                 </div>
@@ -173,13 +175,22 @@ Regresar</a>
                                         </div>
                         
                                           <div class="col-md-4">
-                                            <label for="nomenclatura" class="form-label">Nomenclatura</label>
-                                            <input type="text" class="form-control" id="nomenclatura" name="nomenclatura">
+                                            <label for="fecha" class="form-label">Fecha</label>
+                                            <input type="date" class="form-control" id="fecha" name="fecha">
                                           </div>
                                           <div class="col-md-4">
+                                            <label for="ubicacion" class="form-label">ubicacion</label>
+                                            <select class="form-select" name="ubicacion" aria-label="Default select example">
+                                            
+                                            <option value="I">Interna</option>
+                                            <option value="E">Externa</option>
+                                            
+                                          </select>
+                                        </div>
+                                          {{-- <div class="col-md-4">
                                             <label for="ubicacion" class="form-label">Ubicacion</label>
                                             <input type="text" class="form-control" id="ubicacion" name="ubicacion">
-                                          </div>
+                                          </div> --}}
                                           <div class="col-md-4">
                                             <label for="url" class="form-label">Url (En caso de ser un video) </label>
                                             <input type="text" class="form-control" id="url" name="url">
@@ -193,7 +204,10 @@ Regresar</a>
                               <br>
                                 <center>
                                     <button type="submit" class="btn btn-warning btn-lg">Guardar</button>
-                                    <button type="submit" class="btn btn-danger btn-lg">Cancelar</button>
+                                    {{-- <button type="submit" class="btn btn-danger btn-lg">Cancelar</button> --}}
+                                    <a class="btn btn-danger btn-lg"  href="{{ url('/dropzone')}}" role="button">
+                                        Cancelar</a>
+                               
                                 </center>
                                 </form>
                                 <br>

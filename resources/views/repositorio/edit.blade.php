@@ -44,9 +44,10 @@
                 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!"><i class="fa fa-home" aria-hidden="true"></i>
-                             home</a></li>                       
-                        <li class="nav-item"><a class="nav-link" href="#!"><i class="fa-solid fa-user"></i> usuario</a></li>
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="{{ url('busqueda') }}"><i class="fa fa-home" aria-hidden="true"></i>
+                             home</a></li>   
+                             <li class="nav-item"><a class="nav-link" href="{{ url('/mostrar') }}"><i class="fa-solid fa-user"></i> {{ auth()->user()->name }}</a>
+                    
                     </ul>
                     
                 </div>
@@ -107,6 +108,8 @@
         }
     </style>
 </form>
+<a class="btn btn-primary" href="{{ url()->previous() }}" role="button"><i class="fa fa-chevron-circle-left" aria-hidden="true"></i> Regresar</a>
+
 <center> 
 <h1 class="display-8 fw-bold mt-0">EDITAR</h1>
 </center> 

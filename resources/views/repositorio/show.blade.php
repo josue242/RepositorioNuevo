@@ -18,7 +18,7 @@ Regresar</a>
      
       <th scope="col">Fecha</th>
       <th scope="col">Archivo</th>
-      
+      <th scope="col">Vizualizar</th>
       <th scope="col">Acciones</th>
       
   
@@ -43,28 +43,29 @@ Regresar</a>
                         </td>
 
                         <td>
+                            
                             @foreach( preg_split("/\|/",$repo->file) as $archivo)
                             <a href="images/{{$archivo}}" target="_blank">
                             {{$archivo}} <br> </a>
                         @endforeach
+                      
                         </td>
-                        
            
-                        <td>
-              
+                        
+              <td>
                             <a class="btn btn-warning  btn-sm"     href="{{ url('download/'.$repo->id) }}"     role="button"><i class="fa fa-download" aria-hidden="true"></i>
   Descargar</a>
-             </td>  
+             
 
-  <td>
+  
     @php 
     @endphp
     @if ($esAdministrador === true)
         
         @method('DELETE')
         <button type="submit" class="btn btn-danger btn-sm" title="Delete Contact" onclick="return confirm(&quot;Confirm delete?&quot;)"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
-</td>
-<td>                   
+
+                 
 
                
     <a class="btn btn-success  btn-sm"  href="{{ route('busqueda.edit', $repo->id)}}" role="button"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>

@@ -12,6 +12,7 @@ use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\BusquedaController;
 use App\Http\Controllers\FiltradoController;
 use App\Http\Controllers\ArchivoController;
+use App\Http\Controllers\MostrarController;
 use App\Models\Tipomaterial;
 
 use App\Models\Rol;
@@ -30,7 +31,7 @@ use App\Models\Rol;
 
 
 Route::get('welcome', [BusquedaController::class,'welcome']);
-Route::get('download/{archivo}', [DropzoneController::class,'download'])->name('download');
+//Route::get('download/{archivo}', [DropzoneController::class,'download'])->name('download');
 Route::get('download/{archivo}', [FiltradoController::class,'download'])->name('download');
 Route::resource('tema', TemaController::class);
 Route::resource('template', TemplateController::class);
@@ -40,7 +41,7 @@ Route::resource('filtrados', ArchivoController::class);
 Route::resource('edit', AltaController::class);
 Route::get('dropzone', [DropzoneController::class,'dropzone']);
 Route::post('dropzone-store', [DropzoneController::class,'dropzoneStore'])->name('dropzone.store');
-
+Route::resource('mostrar', MostrarController::class);
 Auth::routes(['register'=> true, 'reset' => false, 'verify'=>false]);
 //Route::post('archivo-store', [ArchivoController::class,'store'])->name('archivo.store');
 
