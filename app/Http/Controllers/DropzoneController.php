@@ -17,11 +17,6 @@ class DropzoneController extends Controller
 {
     public function dropzone()
   {
-
-
-
-    
-    
         $tipomateriales = Tipomaterial::all();
         $tema = Tema::all();
         return view(
@@ -85,7 +80,7 @@ class DropzoneController extends Controller
             exit;
         }
 
-        return redirect("dropzone");
+        return back()->with('success', 'El archivo se ha subido correctamente');
     }
 
     function validateData(Request $request)
@@ -108,16 +103,5 @@ class DropzoneController extends Controller
     }
 
 
-    public function download(Repositorio $archivo)
-    {
-
-
-        // foreach( preg_split("/\|/",$archivo->file) as $archivo){
-
-        //}
-
-
-
-        return response()->download(public_path(('images/' . $archivo)), $archivo);
-    }
+ 
 }

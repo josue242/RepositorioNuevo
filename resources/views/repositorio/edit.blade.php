@@ -35,11 +35,11 @@
     <body>
         <!-- Responsive navbar-->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <img src="{{asset('img/Logo.jpeg')}}" alt="logo" width="14%" height="auto" margin_left=auto margin_right= auto>
-
+            <img src="{{asset('image/logo2.png')}}" alt="logo" width="7%" height="auto" margin_left=auto margin_right= auto>
+            <a class="navbar-brand"><h5>COLEGIO DE PROFESIONISTAS COMPARTIR EL CONOCIMIENTO A.C.</h5></a>
+            <br>
+            <br>
             <div class="container px-lg-5">
-                <a class="navbar-brand" href="#!">Colegio de profesionistas, compatir conocimiento</a>
-               
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -108,11 +108,19 @@
         }
     </style>
 </form>
-<a class="btn btn-primary" href="{{ url()->previous() }}" role="button"><i class="fa fa-chevron-circle-left" aria-hidden="true"></i> Regresar</a>
+<a class="btn btn-warning" href="{{ url()->previous() }}" role="button"><i class="fa fa-chevron-circle-left" aria-hidden="true"></i> Regresar</a>
 
 <center> 
 <h1 class="display-8 fw-bold mt-0">EDITAR</h1>
 </center> 
+<br>
+@if (Session::has('success'))
+<div class="alert alert-success">
+
+    {{ Session::get('success') }}
+
+</div>
+@endif
 <br>
 <section style= "pading-top:60px">
     <div class="container">

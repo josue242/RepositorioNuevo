@@ -50,6 +50,30 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+    public function inicio(){
+        $id_usuario = session("usuario_id");
+        //$id_usuario = $_SESSION['user'];
+         
+        $sql="SELECT r.id,r.descripcion FROM rol r INNER JOIN usuariorol ur
+        ON r.id=ur.rol_id 
+        WHERE ur.usuario_id =:usuario";
+        
+        $query=DB::raw($sql);
+        //dd($query);
+        $consulta= DB::select(DB::raw($sql),['usuario'=>$id_usuario]);
+        
+        return view ('/login')->with('esAdministrador',$this->isAdmin($consulta));
+        
+    }
+    private function isAdmin($filas){
+        foreach ($filas as $fila){
+            if (in_array( $fila->id, [1,2] )){
+                return true;
+            }
+            
+        }
+        return false;
+    }
     public function login(Request $request)
     {
      $this->validate($request, [
@@ -82,6 +106,20 @@ class LoginController extends Controller
             $_SESSION['user']=$usuario->id;
             session(['usuario_id'=>$usuario->id]);
          //   dd($usuario);
+
+
+        /*class ProfileController extends Controller {
+            public function updateProfile(Request $request) {
+                if ($request->user()) {
+                    $email = $request->user()->email;
+                }
+            }
+        }
+        auth()->user()
+        auth()->user()->usuario_id
+        auth()->user()->name
+        auth()->user()->gmail
+         */
         }
         
 // ($repositorios); exit;

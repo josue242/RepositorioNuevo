@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Storage;
 
 class FiltradoController extends Controller
 {
-    public function formularioBusqueda($id)
+    public function formularioBusqueda($id, Request $request)
     {
         $tipos = Repositorio::all();
         $id_usuario = session("usuario_id");
@@ -29,22 +29,35 @@ class FiltradoController extends Controller
         $sql2="SELECT r.id,r.descripcion FROM rol r INNER JOIN usuariorol ur
         ON r.id=ur.rol_id 
         WHERE ur.usuario_id =:usuario";
+
+        $sql = DB::table('repositorio as r')
+        ->join('detallerepo as dr', 'dr.repositorio_id', '=', 'r.id')
+        ->join('tipomaterial as tp', 'tp.id', '=', 'dr.material_id')
+        ->select('r.id', 'r.fecha', 'r.documento', 'r.file','r.url')
+        ->where('dr.material_id', '=',  $request->id)
+        ->paginate(10);
+        //->where('r.documento', 'like', '%' . $request->titulo . '%')
+        
+
+     
+         
         
         $query=DB::raw($sql2);
         //dd($query);
         $consulta= DB::select(DB::raw($sql2),['usuario'=>$id_usuario]);
-        return view('View.filtrado', compact('id', 'tipos'))->with('esAdministrador',$this->isAdmin2($consulta));
+        return view('View.filtrado', compact('id', 'tipos', 'sql'))->with('esAdministrador',$this->isAdmin2($consulta));
     }
+    
     public function filtradoRespuesta(Request $request)
     {
 
         $sql = DB::table('repositorio as r')
             ->join('detallerepo as dr', 'dr.repositorio_id', '=', 'r.id')
             ->join('tipomaterial as tp', 'tp.id', '=', 'dr.material_id')
-            ->select('r.id', 'r.fecha', 'r.documento', 'r.file')
+            ->select('r.id', 'r.fecha', 'r.documento', 'r.file','r.url')
             ->where('dr.material_id', '=',  $request->id)
             ->where('r.documento', 'like', '%' . $request->titulo . '%')
-            ->get();
+            ->paginate(2);
 
             $id_usuario = session("usuario_id");
             //$id_usuario = $_SESSION['user'];
@@ -91,7 +104,7 @@ class FiltradoController extends Controller
             echo $ex->getMessage();
             exit;
         }
-        return redirect('busqueda');
+        return back()->with('success', 'Eliminado correctamente');
     }
 
    // class ZipArchive implements Countable { }
@@ -99,41 +112,25 @@ class FiltradoController extends Controller
     public function descarga($file){
        // return response()->download(public_path(('images/'.$file)));
     }
-    public function download ($id=0)
+    public function download ($id)
     {
-        $zip = new ZipArchive;
+        $zip = new ZipArchive();
         $documento = Repositorio::find($id);
-
         $files = explode('|', $documento->file);
-     
-   
         $fileName = 'file_tmp.zip';
-
-       
-        if ($zip->open(public_path($fileName), ZipArchive::CREATE) === TRUE) {
+       // dd ($files); exit();
+        if ($zip->open(public_path($fileName), ZIPARCHIVE::CREATE | ZIPARCHIVE::OVERWRITE) === TRUE) {
             foreach ($files as $file) {
-                $archivo = public_path(('/images/'.$file));
-          // $doc = File::get($archivo);
-          $storage= Storage::path($archivo);
-          dd ($archivo); exit();
-                $zip->addFile($storage,$file);
-               
-            }
+            $archivo = public_path(('images/'.$file));
+         $zip->addFile($archivo,$file);    
+           }
             $zip->close();
-           
-  
-        }
-        
-        return response()->download(public_path($fileName),time().$fileName);
-      
-    }
-
-    
-    
+        } 
+        return response()->download(public_path($fileName));
+    }   
 }
 
 //class Zipper extends ZipArchive { 
 
     
 //}
-

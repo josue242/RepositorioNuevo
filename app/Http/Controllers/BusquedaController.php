@@ -78,54 +78,78 @@ class BusquedaController extends Controller
     public function store(Request $request)
     {
         
-       $tema= $request->tema??"";
-       $tema = "%$tema%";
-       $titulo = $request->titulo??"";
-       $titulo = "%$titulo%";
+        $tema= $request->tema??"";
+        $tema = "%$tema%";
+        $titulo = $request->titulo??"";
+        $titulo = "%$titulo%";
     
        $file = "";
        $anio = $request->anio==-1?"":$request->anio;
-       $anio = "%$anio%";
-       $mes = $request->mes==-1?"":$request->mes;
-       $mes = "%$mes%";
-       $tipo = $request->tipo==-1?"":$request->tipo;
-       $tipo = "%$tipo%";
-       $coordinacion = $request->coordinacion==-1?"":$request->coordinacion;
+        $anio = "%$anio%";
+        $mes = $request->mes==-1?"":$request->mes;
+        $mes = "%$mes%";
+        $tipo = $request->tipo==-1?"":$request->tipo;
+        $tipo = "%$tipo%";
+        $coordinacion = $request->coordinacion==-1?"":$request->coordinacion;
        $coordinacion = "%$coordinacion%";
        
-       $sql ="SELECT r.id, r.fecha, r.documento, r.file FROM repositorio r INNER JOIN (repotema rt 
-       INNER JOIN tema t ON rt.tema_id=t.id) 
+    //    $sql ="SELECT r.id, r.fecha, r.documento, r.file, r.url FROM repositorio r INNER JOIN (repotema rt 
+    //    INNER JOIN tema t ON rt.tema_id=t.id) 
+    //    ON rt.repositorio_id = r.id 
+    //    INNER JOIN detallerepo dr ON dr.repositorio_id=r.id 
+    //    INNER JOIN (usuario u  INNER JOIN usuariorol ur ON ur.usuario_id=u.id)
+    //    ON u.id=r.usuario_id 
+    //    WHERE upper(trim(t.descripcion)) like upper(trim(:tema)) and
+    //     dr.material_id like :tipo or
+    //     upper(trim(r.documento)) like upper(trim(:titulo)) and
+    //     month(r.fecha) like :mes AND
+    //     year(r.fecha) like :anio AND
+    //     ur.rol_id like :coordinacion";
+
+    //     $parameters= ['tema'=> $tema,
+    //         'tipo'=> $tipo ,
+    //         'titulo'=> $titulo,
+    //         'mes'=> $mes ,
+    //         'anio'=> $anio ,
+    //       'coordinacion'=> $coordinacion,
+        
+    //     ];
+
+       $page = !empty($request->input('page')) ? $request->input('page'):'1';
+
+        $perpage= "10";
+        $offset = ($page -1) * $perpage;
+        $rows = DB::select( "SELECT COUNT('*') as total FROM repositorio");
+        $numrows = $rows [0] ->total; 
+       $pagingQuery = "LIMIT {$offset}, {$perpage}";
+        $parameters =  ['tema'=> $tema,
+             'tipo'=> $tipo ,
+             'titulo'=> $titulo,
+             'mes'=> $mes ,
+             'anio'=> $anio ,
+          'coordinacion'=> $coordinacion,
+        
+    ];
+        $repositorios = DB::select("SELECT r.id, r.fecha, r.documento, r.file, r.url FROM repositorio r INNER JOIN (repotema rt 
+        INNER JOIN tema t ON rt.tema_id=t.id) 
        ON rt.repositorio_id = r.id 
-       INNER JOIN detallerepo dr ON dr.repositorio_id=r.id 
-       INNER JOIN (usuario u  INNER JOIN usuariorol ur ON ur.usuario_id=u.id)
-       ON u.id=r.usuario_id 
+        INNER JOIN detallerepo dr ON dr.repositorio_id=r.id 
+        INNER JOIN (usuario u  INNER JOIN usuariorol ur ON ur.usuario_id=u.id)
+        ON u.id=r.usuario_id 
        WHERE upper(trim(t.descripcion)) like upper(trim(:tema)) and
         dr.material_id like :tipo or
-        upper(trim(r.documento)) like upper(trim(:titulo)) and
-        month(r.fecha) like :mes AND
+         upper(trim(r.documento)) like upper(trim(:titulo)) and
+         month(r.fecha) like :mes AND
         year(r.fecha) like :anio AND
-        ur.rol_id like :coordinacion";
-
-
-
-
-        $parameters= ['tema'=> $tema,
-            'tipo'=> $tipo ,
-            'titulo'=> $titulo,
-            'mes'=> $mes ,
-            'anio'=> $anio ,
-          'coordinacion'=> $coordinacion,
-          
-        
-        ];
-
-       
-        //subir archivos
+        ur.rol_id like :coordinacion". $pagingQuery, $parameters);
+       //return view ('vistax', compact('query'));
 
      
-        $query=DB::raw($sql);
+       // $query=DB::raw($sql);
        
-        $repositorios= DB::select(DB::raw($sql),$parameters);
+     //   $repositorios=  DB::select(DB::raw($sql)->paginate(10),$parameters);
+    //$repositorios=  DB::select(DB::raw($sql),$parameters);
+   //$repositorios= Repositorio::paginate(5);
     
         // ($repositorios); exit;
        // dd($repositorios); exit; 
@@ -157,7 +181,10 @@ class BusquedaController extends Controller
        }
        return false;
    }
+       public function url ($url=""){
+        $documento = Repositorio::find($url);
         
+       }
     
   
 
@@ -181,10 +208,8 @@ class BusquedaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    
         {
             $this->validateData($request);
-       
             $fileNames="";
             if ($request->file('file'))
             foreach($request->file('file') as $file)
@@ -193,9 +218,8 @@ class BusquedaController extends Controller
                 $file->move(public_path('images'), $name);
                 $fileNames = $fileNames.$name."|";  
                         }
-                $fileNames=substr($fileNames,0,strlen($fileNames)-1);
-                        
-            $currentValue = Repositorio::find($id);
+                $fileNames=substr($fileNames,0,strlen($fileNames)-1);        
+                $currentValue = Repositorio::find($id);
         
         if (empty($fileNames)) $fileNames = $currentValue->file;
              $campos=[
@@ -208,7 +232,8 @@ class BusquedaController extends Controller
              
              
              Repositorio::whereId($id)->update($campos);
-             return redirect('busqueda')->with('success', 'Actualizado correctamente...');
+             
+             return back()->with('success', 'Actualizado correctamente');
          }
      
     
@@ -240,7 +265,7 @@ class BusquedaController extends Controller
             DB::rollBack();
             echo $ex->getMessage();exit;
         }
-        return redirect('busqueda');
+        return back()->with('success', 'Eliminado correctamente');
         
     }
 
